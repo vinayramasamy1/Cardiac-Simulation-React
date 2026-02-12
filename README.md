@@ -47,8 +47,6 @@ The application is designed to be **view-only**, lightweight, and easily accessi
 - **JavaScript (React Framework)**
 - SVG icons for scalable, crisp UI graphics
 
-No frameworks required.
-
 ---
 
 ## 🎯 Intended Use
