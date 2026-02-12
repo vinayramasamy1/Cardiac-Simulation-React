@@ -1,0 +1,58 @@
+export const RHYTHMS = [
+  {
+    id: "normal-sinus",
+    name: "Normal Sinus Rhythm",
+    tag: "NSR",
+    image: "/assets/ecg/normal-sinus.jpg",
+    description: "Normal heart rhythm with regular rate and pattern.",
+  },
+  {
+    id: "atrial-fibrillation",
+    name: "Atrial Fibrillation",
+    tag: "AFib",
+    image: "/assets/ecg/atrial-fibrillation.jpg",
+    description: "Irregular atrial rhythm without distinct P waves present.",
+  },
+  {
+    id: "ventricular-fibrillation",
+    name: "Ventricular Fibrillation",
+    tag: "VFib",
+    image: "/assets/ecg/ventricular-fibrillation.jpg",
+    description: "Chaotic ventricular activity producing no effective cardiac output.",
+  },
+  {
+    id: "atrial-flutter",
+    name: "Atrial Flutter",
+    tag: "Flutter",
+    image: "/assets/ecg/atrial-flutter.jpg",
+    description: "Rapid atrial rhythm showing classic sawtooth flutter waves.",
+  },
+  {
+    id: "atrial-tachycardia",
+    name: "Atrial Tachycardia",
+    tag: "ATach",
+    image: "/assets/ecg/atrial-tachycardia.jpg",
+    description: "Fast atrial rhythm originating outside normal sinus node.",
+  },
+  {
+    id: "ventricular-tachycardia",
+    name: "Ventricular Tachycardia",
+    tag: "VTach",
+    image: "/assets/ecg/ventricular-tachycardia.jpg",
+    description: "Fast ventricular rhythm that may rapidly become life-threatening.",
+  },
+  {
+    id: "supraventricular-tachycardia",
+    name: "Supraventricular Tachycardia",
+    tag: "SVT",
+    image: "/assets/ecg/supraventricular-tachycardia.jpg",
+    description: "Very fast rhythm arising above the ventricles suddenly.",
+  },
+  {
+    id: "bradycardia",
+    name: "Bradycardia",
+    tag: "Brady",
+    image: "/assets/ecg/bradycardia.jpg",
+    description: "Slow heart rate that may reduce cardiac output.",
+  },
+];

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer rounded square -->
+  <rect
+    x="10"
+    y="10"
+    width="44"
+    height="44"
+    rx="10"
+    stroke="white"
+    stroke-width="2"
+  />
+
+  <!-- Checkmark -->
+  <path
+    d="M22 34 L30 42 L44 26"
+    stroke="white"
+    stroke-width="4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>

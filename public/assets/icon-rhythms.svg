@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer rounded square (aligned to even pixels) -->
+  <rect
+    x="10"
+    y="10"
+    width="44"
+    height="44"
+    rx="10"
+    stroke="white"
+    stroke-width="2"
+  />
+
+  <!-- ECG line (all points on integer coords) -->
+  <path
+    d="M18 32 H26 L30 24 L34 40 L38 30 H46"
+    stroke="white"
+    stroke-width="3"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+</svg>
