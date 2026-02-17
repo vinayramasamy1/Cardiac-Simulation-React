@@ -23,7 +23,7 @@ export const RHYTHMS = [
   {
     id: "atrial-flutter",
     name: "Atrial Flutter",
-    tag: "Flutter",
+    tag: "AFL",
     image: "/assets/ecg/atrial-flutter.jpg",
     description: "Rapid atrial rhythm showing classic sawtooth flutter waves.",
   },
