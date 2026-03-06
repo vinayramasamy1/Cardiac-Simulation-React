@@ -1,38 +1,37 @@
+// src/pages/CaseStudies.jsx
 import React, { useMemo, useState } from "react";
+import { RHYTHMS } from "../data/rhythms.js";
 
-function buildCases() {
-  return Array.from({ length: 8 }, (_, i) => ({
-    id: `case-${i + 1}`,
-    title: `Case Study ${i + 1}`,
-    meta: `#${i + 1} • Unassigned`,
-    content: "",
-  }));
+function rhythmToPdfPath(rhythmId) {
+  return `/assets/case-studies/${rhythmId}.pdf`;
 }
 
 export default function CaseStudies() {
-  const initialCases = useMemo(() => buildCases(), []);
+  // Build 8 case buttons from your 8 rhythms (same order as RHYTHMS)
+  const cases = useMemo(() => {
+    return RHYTHMS.map((r, idx) => ({
+      id: r.id,
+      title: `Case Study ${idx + 1}`,
+      rhythmName: r.name,
+      meta: `#${idx + 1} • ${r.tag}`,
+      pdf: rhythmToPdfPath(r.id),
+    }));
+  }, []);
+
+  const [collapsed, setCollapsed] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [cases, setCases] = useState(initialCases);
 
   const active = cases[activeIndex];
 
-  function setActive(idx) {
-    const clamped = Math.max(0, Math.min(cases.length - 1, idx));
-    setActiveIndex(clamped);
-  }
-
-  function updateContent(nextText) {
-    setCases((prev) => {
-      const copy = prev.slice();
-      copy[activeIndex] = { ...copy[activeIndex], content: nextText };
-      return copy;
-    });
-  }
-
   return (
-    <div className="cs-app">
+    <div className={`cs-app ${collapsed ? "cs-collapsed" : ""}`}>
+      {/* Top bar: title only (no redundant buttons) */}
+      <header className="cs-topbar">
+        <div className="cs-top-title">Case Studies</div>
+      </header>
+
       <div className="cs-layout">
-        {/* LEFT: Case list (keep) */}
+        {/* LEFT */}
         <aside className="cs-left" aria-label="Case study list">
           <div className="cs-left-title">Case Studies</div>
 
@@ -42,12 +41,20 @@ export default function CaseStudies() {
                 key={c.id}
                 className={`cs-item ${idx === activeIndex ? "active" : ""}`}
                 type="button"
-                onClick={() => setActive(idx)}
+                onClick={() => setActiveIndex(idx)}
                 aria-pressed={idx === activeIndex}
+                title={c.rhythmName}
               >
                 {c.title}
               </button>
             ))}
+          </div>
+
+          {/* Only sidebar collapse control (no Go Home) */}
+          <div className="cs-quick">
+            <button className="cs-btn" type="button" onClick={() => setCollapsed((v) => !v)}>
+              {collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            </button>
           </div>
         </aside>
 
@@ -58,22 +65,21 @@ export default function CaseStudies() {
             <div className="cs-meta">{active.meta}</div>
           </div>
 
-          <div className="cs-view" role="region" aria-label="Viewing window">
-            <div className="placeholder">
-              {active.title} — Large viewing window (placeholder)
-              <br />
-              Add images, strips, vitals panels, or 3D here.
-            </div>
+          {/* The big “canvas” is the PDF viewer */}
+          <div className="cs-view" role="region" aria-label="Case PDF viewer">
+            <iframe
+              title={`${active.title} PDF`}
+              src={`${active.pdf}#zoom=page-width`}
+              style={{
+                width: "100%",
+                height: "100%",
+                border: "none",
+              }}
+            />
           </div>
 
-          <div>
-            <label className="cs-desc-label">Condition overview / description</label>
-            <textarea
-              className="cs-desc"
-              value={active.content}
-              onChange={(e) => updateContent(e.target.value)}
-              placeholder="Type your case description here..."
-            />
+          <div style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>
+            Rhythm: <span style={{ color: "white" }}>{active.rhythmName}</span>
           </div>
         </main>
 
@@ -83,6 +89,17 @@ export default function CaseStudies() {
           <div className="cs-feature">Symptoms</div>
           <div className="cs-feature">Tools / Scans</div>
           <div className="cs-feature">Treatment</div>
+
+          {/* Open PDF moved here (under Treatment) */}
+          <a
+            className="cs-btn"
+            href={active.pdf}
+            target="_blank"
+            rel="noreferrer"
+            style={{ marginTop: "16px", textAlign: "center" }}
+          >
+            Open PDF
+          </a>
         </aside>
       </div>
     </div>

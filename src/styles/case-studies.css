@@ -152,14 +152,14 @@
 
 .cs-view{
   border-radius:10px;
-  border: 3px solid rgba(255,255,255,0.06);
-  min-height: 420px;
+  border:3px solid rgba(255,255,255,0.06);
+  min-height: 650px;
+  height: 75vh;   /* makes the viewer scale with screen */
   background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
   display:flex;
   align-items:center;
   justify-content:center;
-  font-weight:600;
-  color:rgba(255,255,255,0.8);
+  overflow:hidden;
 }
 
 .cs-view .placeholder{
@@ -250,3 +250,8 @@
   .cs-right{ order:3; min-height:auto; }
   .cs-left{ order:1; min-height:auto; }
 }
+
+.cs-view{
+  background:#0f1113;
+}
+
