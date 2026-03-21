@@ -6,8 +6,15 @@ function rhythmToPdfPath(rhythmId) {
   return `/assets/case-studies/${rhythmId}.pdf`;
 }
 
+function rhythmToScenarioPath(rhythmId) {
+  return `/assets/casestudypngs/${rhythmId}-scenario.png`;
+}
+
+function rhythmToTreatmentPath(rhythmId) {
+  return `/assets/casestudypngs/${rhythmId}-treatment.png`;
+}
+
 export default function CaseStudies() {
-  // Build 8 case buttons from your 8 rhythms (same order as RHYTHMS)
   const cases = useMemo(() => {
     return RHYTHMS.map((r, idx) => ({
       id: r.id,
@@ -15,23 +22,114 @@ export default function CaseStudies() {
       rhythmName: r.name,
       meta: `#${idx + 1} • ${r.tag}`,
       pdf: rhythmToPdfPath(r.id),
+      scenarioImage: rhythmToScenarioPath(r.id),
+      treatmentImage: rhythmToTreatmentPath(r.id),
     }));
   }, []);
 
   const [collapsed, setCollapsed] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [lockedView, setLockedView] = useState(null);
+  const [hoveredView, setHoveredView] = useState(null);
+  const [loadedImages, setLoadedImages] = useState({});
 
   const active = cases[activeIndex];
 
+  const markImageLoaded = (src, isLoaded) => {
+    setLoadedImages((prev) => {
+      if (prev[src] === isLoaded) return prev;
+      return { ...prev, [src]: isLoaded };
+    });
+  };
+
+  const hasScenarioImage = loadedImages[active.scenarioImage] === true;
+  const hasTreatmentImage = loadedImages[active.treatmentImage] === true;
+
+  const defaultView = hasScenarioImage ? "scenario" : "pdf";
+  const resolvedView = hoveredView || lockedView || defaultView;
+
+  const handleCaseChange = (idx) => {
+    setActiveIndex(idx);
+    setLockedView(null);
+    setHoveredView(null);
+  };
+
+  const renderCanvasContent = () => {
+    if (resolvedView === "scenario") {
+      if (hasScenarioImage) {
+        return (
+          <div className="cs-media-wrap">
+            <img
+              className="cs-media-image"
+              src={active.scenarioImage}
+              alt={`${active.rhythmName} patient scenario`}
+            />
+          </div>
+        );
+      }
+
+      return (
+        <div className="cs-view-placeholder">
+          Add this file to enable Patient Scenario:
+          <span>{active.scenarioImage}</span>
+        </div>
+      );
+    }
+
+    if (resolvedView === "treatment") {
+      if (hasTreatmentImage) {
+        return (
+          <div className="cs-media-wrap">
+            <img
+              className="cs-media-image"
+              src={active.treatmentImage}
+              alt={`${active.rhythmName} treatment visualization`}
+            />
+          </div>
+        );
+      }
+
+      return (
+        <div className="cs-view-placeholder">
+          Add this file to enable Treatment:
+          <span>{active.treatmentImage}</span>
+        </div>
+      );
+    }
+
+    return (
+      <iframe
+        title={`${active.title} PDF`}
+        src={`${active.pdf}#zoom=page-width`}
+        className="cs-pdf-frame"
+      />
+    );
+  };
+
   return (
     <div className={`cs-app ${collapsed ? "cs-collapsed" : ""}`}>
-      {/* Top bar: title only (no redundant buttons) */}
+      {cases.map((c) => (
+        <div key={c.id} style={{ display: "none" }}>
+          <img
+            src={c.scenarioImage}
+            alt=""
+            onLoad={() => markImageLoaded(c.scenarioImage, true)}
+            onError={() => markImageLoaded(c.scenarioImage, false)}
+          />
+          <img
+            src={c.treatmentImage}
+            alt=""
+            onLoad={() => markImageLoaded(c.treatmentImage, true)}
+            onError={() => markImageLoaded(c.treatmentImage, false)}
+          />
+        </div>
+      ))}
+
       <header className="cs-topbar">
         <div className="cs-top-title">Case Studies</div>
       </header>
 
       <div className="cs-layout">
-        {/* LEFT */}
         <aside className="cs-left" aria-label="Case study list">
           <div className="cs-left-title">Case Studies</div>
 
@@ -41,7 +139,7 @@ export default function CaseStudies() {
                 key={c.id}
                 className={`cs-item ${idx === activeIndex ? "active" : ""}`}
                 type="button"
-                onClick={() => setActiveIndex(idx)}
+                onClick={() => handleCaseChange(idx)}
                 aria-pressed={idx === activeIndex}
                 title={c.rhythmName}
               >
@@ -50,53 +148,58 @@ export default function CaseStudies() {
             ))}
           </div>
 
-          {/* Only sidebar collapse control (no Go Home) */}
           <div className="cs-quick">
-            <button className="cs-btn" type="button" onClick={() => setCollapsed((v) => !v)}>
+            <button
+              className="cs-btn"
+              type="button"
+              onClick={() => setCollapsed((v) => !v)}
+            >
               {collapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             </button>
           </div>
         </aside>
 
-        {/* CENTER */}
         <main className="cs-center">
           <div className="cs-title-row">
             <h2 className="cs-title">{active.title}</h2>
             <div className="cs-meta">{active.meta}</div>
           </div>
 
-          {/* The big “canvas” is the PDF viewer */}
-          <div className="cs-view" role="region" aria-label="Case PDF viewer">
-            <iframe
-              title={`${active.title} PDF`}
-              src={`${active.pdf}#zoom=page-width`}
-              style={{
-                width: "100%",
-                height: "100%",
-                border: "none",
-              }}
-            />
+          <div className="cs-view" role="region" aria-label="Case study viewer">
+            {renderCanvasContent()}
           </div>
 
-          <div style={{ color: "rgba(255,255,255,0.75)", fontWeight: 600 }}>
-            Rhythm: <span style={{ color: "white" }}>{active.rhythmName}</span>
+          <div className="cs-rhythm-line">
+            Rhythm: <span>{active.rhythmName}</span>
           </div>
         </main>
 
-        {/* RIGHT */}
         <aside className="cs-right" aria-label="Case features">
-          <div className="cs-feature">Patient History</div>
-          <div className="cs-feature">Symptoms</div>
-          <div className="cs-feature">Tools / Scans</div>
-          <div className="cs-feature">Treatment</div>
+          <button
+            type="button"
+            className={`cs-feature-btn ${resolvedView === "scenario" ? "active" : ""}`}
+            onMouseEnter={() => setHoveredView("scenario")}
+            onMouseLeave={() => setHoveredView(null)}
+            onClick={() => setLockedView("scenario")}
+          >
+            Patient Scenario
+          </button>
 
-          {/* Open PDF moved here (under Treatment) */}
+          <button
+            type="button"
+            className={`cs-feature-btn ${resolvedView === "treatment" ? "active" : ""}`}
+            onMouseEnter={() => setHoveredView("treatment")}
+            onMouseLeave={() => setHoveredView(null)}
+            onClick={() => setLockedView("treatment")}
+          >
+            Treatment
+          </button>
+
           <a
-            className="cs-btn"
+            className="cs-btn cs-btn--pdf"
             href={active.pdf}
             target="_blank"
             rel="noreferrer"
-            style={{ marginTop: "16px", textAlign: "center" }}
           >
             Open PDF
           </a>
