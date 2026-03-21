@@ -23,6 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 
-
+public/
 
 info.txt
