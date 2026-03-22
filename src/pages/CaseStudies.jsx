@@ -2,10 +2,6 @@
 import React, { useMemo, useState } from "react";
 import { RHYTHMS } from "../data/rhythms.js";
 
-function rhythmToPdfPath(rhythmId) {
-  return `/assets/case-studies/${rhythmId}.pdf`;
-}
-
 function rhythmToScenarioPath(rhythmId) {
   return `/assets/casestudypngs/${rhythmId}-scenario.png`;
 }
@@ -21,7 +17,6 @@ export default function CaseStudies() {
       title: `Case Study ${idx + 1}`,
       rhythmName: r.name,
       meta: `#${idx + 1} • ${r.tag}`,
-      pdf: rhythmToPdfPath(r.id),
       scenarioImage: rhythmToScenarioPath(r.id),
       treatmentImage: rhythmToTreatmentPath(r.id),
     }));
@@ -45,7 +40,7 @@ export default function CaseStudies() {
   const hasScenarioImage = loadedImages[active.scenarioImage] === true;
   const hasTreatmentImage = loadedImages[active.treatmentImage] === true;
 
-  const defaultView = hasScenarioImage ? "scenario" : "pdf";
+  const defaultView = hasScenarioImage ? "scenario" : "treatment";
   const resolvedView = hoveredView || lockedView || defaultView;
 
   const handleCaseChange = (idx) => {
@@ -58,20 +53,24 @@ export default function CaseStudies() {
     if (resolvedView === "scenario") {
       if (hasScenarioImage) {
         return (
-          <div className="cs-media-wrap">
-            <img
-              className="cs-media-image"
-              src={active.scenarioImage}
-              alt={`${active.rhythmName} patient scenario`}
-            />
+          <div className="cs-view-content">
+            <div className="cs-media-wrap">
+              <img
+                className="cs-media-image"
+                src={active.scenarioImage}
+                alt={`${active.rhythmName} patient scenario`}
+              />
+            </div>
           </div>
         );
       }
 
       return (
-        <div className="cs-view-placeholder">
-          Add this file to enable Patient Scenario:
-          <span>{active.scenarioImage}</span>
+        <div className="cs-view-content">
+          <div className="cs-view-placeholder">
+            Add this file to enable Patient Scenario:
+            <span>{active.scenarioImage}</span>
+          </div>
         </div>
       );
     }
@@ -79,30 +78,32 @@ export default function CaseStudies() {
     if (resolvedView === "treatment") {
       if (hasTreatmentImage) {
         return (
-          <div className="cs-media-wrap">
-            <img
-              className="cs-media-image"
-              src={active.treatmentImage}
-              alt={`${active.rhythmName} treatment visualization`}
-            />
+          <div className="cs-view-content">
+            <div className="cs-media-wrap">
+              <img
+                className="cs-media-image"
+                src={active.treatmentImage}
+                alt={`${active.rhythmName} treatment visualization`}
+              />
+            </div>
           </div>
         );
       }
 
       return (
-        <div className="cs-view-placeholder">
-          Add this file to enable Treatment:
-          <span>{active.treatmentImage}</span>
+        <div className="cs-view-content">
+          <div className="cs-view-placeholder">
+            Add this file to enable Treatment:
+            <span>{active.treatmentImage}</span>
+          </div>
         </div>
       );
     }
 
     return (
-      <iframe
-        title={`${active.title} PDF`}
-        src={`${active.pdf}#zoom=page-width`}
-        className="cs-pdf-frame"
-      />
+      <div className="cs-view-content">
+        <div className="cs-view-placeholder">Select a section to begin</div>
+      </div>
     );
   };
 
@@ -194,15 +195,6 @@ export default function CaseStudies() {
           >
             Treatment
           </button>
-
-          <a
-            className="cs-btn cs-btn--pdf"
-            href={active.pdf}
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open PDF
-          </a>
         </aside>
       </div>
     </div>
