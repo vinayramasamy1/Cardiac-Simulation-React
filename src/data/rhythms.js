@@ -27,13 +27,15 @@ export const RHYTHMS = [
     image: "/assets/ecg/atrial-flutter.jpg",
     description: "Rapid atrial rhythm showing classic sawtooth flutter waves.",
   },
+
   {
-    id: "atrial-tachycardia",
-    name: "Atrial Tachycardia",
-    tag: "ATach",
-    image: "/assets/ecg/atrial-tachycardia.jpg",
-    description: "Fast atrial rhythm originating outside normal sinus node.",
+    id: "sinus-tachycardia",
+    name: "Sinus Tachycardia",
+    tag: "STach",
+    image: "/assets/ecg/sinus-tachycardia.jpg",
+    description: "Elevated heart rate originating from the sinus node.",
   },
+
   {
     id: "ventricular-tachycardia",
     name: "Ventricular Tachycardia",
@@ -48,11 +50,12 @@ export const RHYTHMS = [
     image: "/assets/ecg/supraventricular-tachycardia.jpg",
     description: "Very fast rhythm arising above the ventricles suddenly.",
   },
+
   {
-    id: "bradycardia",
-    name: "Bradycardia",
-    tag: "Brady",
-    image: "/assets/ecg/bradycardia.jpg",
-    description: "Slow heart rate that may reduce cardiac output.",
+    id: "wpw",
+    name: "Wolff-Parkinson-White (WPW)",
+    tag: "WPW",
+    image: "/assets/ecg/wpw.jpg",
+    description: "Accessory pathway causing pre-excitation and rapid tachyarrhythmias.",
   },
 ];
