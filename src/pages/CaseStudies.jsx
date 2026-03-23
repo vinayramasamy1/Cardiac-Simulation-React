@@ -22,7 +22,7 @@ export default function CaseStudies() {
     }));
   }, []);
 
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
   const [lockedView, setLockedView] = useState(null);
   const [hoveredView, setHoveredView] = useState(null);
