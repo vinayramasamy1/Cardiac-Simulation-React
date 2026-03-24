@@ -48,7 +48,7 @@ function ReviewsHome() {
       <div className="home-center reviews-home">
         <h1 className="home-title">Reviews</h1>
         <p className="home-subtitle">
-          Choose a category to begin a 10-question quick review.
+          Choose a category to begin a quick review.
         </p>
 
         <div className="home-tiles" role="list" aria-label="Review categories">
