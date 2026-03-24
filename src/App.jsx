@@ -18,6 +18,7 @@ export default function App() {
         <Route path="/sim/:id" element={<Sim />} />
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/reviews/:category" element={<Reviews />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Shell>
