@@ -77,6 +77,7 @@ export default function EKGWaveforms() {
 
   function handleSelectRhythm(rhythmId) {
     setSelectedRhythmId(rhythmId);
+    setIsPlaying(true);
     setSpeed(1);
   }
 
