@@ -4,6 +4,7 @@ import Shell from "./layout/Shell.jsx";
 
 import Home from "./pages/Home.jsx";
 import Rhythms from "./pages/Rhythms.jsx";
+import EKGWaveforms from "./pages/EKGWaveforms.jsx";
 import Sim from "./pages/Sim.jsx";
 import CaseStudies from "./pages/CaseStudies.jsx";
 import Reviews from "./pages/Reviews.jsx";
@@ -15,6 +16,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/rhythms" element={<Rhythms />} />
+        <Route path="/ekg-waveforms" element={<EKGWaveforms />} />
         <Route path="/sim/:id" element={<Sim />} />
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/reviews" element={<Reviews />} />

@@ -24,6 +24,9 @@ export default function Topbar() {
         <NavLink className={linkClass} to="/rhythms">
           Rhythms
         </NavLink>
+        <NavLink className={linkClass} to="/ekg-waveforms">
+          EKG Waveforms
+        </NavLink>
         <NavLink className={linkClass} to="/case-studies">
           Case Studies
         </NavLink>
