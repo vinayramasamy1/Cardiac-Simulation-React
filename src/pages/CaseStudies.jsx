@@ -4,10 +4,10 @@ import { RHYTHMS } from "../data/rhythms.js";
 
 const SCENARIO_CONTENT = {
   "normal-sinus": {
-    patientName: "Jordan Ellis",
-    age: 34,
+    patientName: "Emily Carter",
+    age: 24,
     situation:
-      "The patient reports mild chest fluttering after a stressful shift but is alert, speaking clearly, and hemodynamically stable on arrival.",
+      "Emily presents with dizziness and mild nausea after being in extreme heat earlier but is now resting indoors with stable vital signs.",
     findings: [
       "Skin warm and dry with no respiratory distress",
       "Regular pulse and normal mentation",
@@ -15,10 +15,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "atrial-fibrillation": {
-    patientName: "Maria Lopez",
-    age: 71,
+    patientName: "Robert Mitchell",
+    age: 72,
     situation:
-      "The patient describes sudden palpitations, fatigue, and mild shortness of breath that began earlier this morning while walking to the kitchen.",
+      "Robert presents with palpitations and shortness of breath and is found to have an irregular heart rhythm.",
     findings: [
       "Irregular pulse noted at the wrist",
       "Reports intermittent dizziness with exertion",
@@ -26,10 +26,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "ventricular-fibrillation": {
-    patientName: "Thomas Reed",
+    patientName: "James Holloway",
     age: 58,
     situation:
-      "Bystanders report the patient collapsed without warning. CPR is in progress on crew arrival and the patient is unresponsive.",
+      "James collapses suddenly and is found unresponsive with no pulse and a chaotic rhythm on the monitor.",
     findings: [
       "No palpable pulse",
       "Apneic and unresponsive",
@@ -37,10 +37,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "atrial-flutter": {
-    patientName: "Avery Patel",
+    patientName: "Linda Chavez",
     age: 66,
     situation:
-      "The patient complains of a racing heartbeat and mild chest pressure after climbing a flight of stairs, but remains awake and oriented.",
+      "Linda reports a sudden onset of a racing heart, and her monitor shows a regular patterned rhythm.",
     findings: [
       "Rapid but organized rhythm appearance",
       "Mild shortness of breath during movement",
@@ -48,10 +48,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "sinus-tachycardia": {
-    patientName: "Ethan Brooks",
-    age: 27,
+    patientName: "Samantha Lee",
+    age: 45,
     situation:
-      "The patient is anxious, febrile, and dehydrated after several hours of vomiting, with a fast pulse that increases further when standing.",
+      "Samantha reports a racing heart after stimulant use earlier in the day and presents with a fast but regular rhythm.",
     findings: [
       "Regular rapid pulse",
       "Dry mucous membranes and delayed capillary refill",
@@ -59,10 +59,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "ventricular-tachycardia": {
-    patientName: "Samuel Grant",
+    patientName: "Daniel Brooks",
     age: 64,
     situation:
-      "The patient reports severe palpitations and near-syncope while seated, with increasing weakness and a sense that he may pass out.",
+      "Daniel presents with lightheadedness and low blood pressure, and his monitor shows a rapid wide-complex rhythm.",
     findings: [
       "Rapid wide-complex rhythm suspected",
       "Cool skin and reduced perfusion signs",
@@ -70,10 +70,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   "supraventricular-tachycardia": {
-    patientName: "Chloe Nguyen",
+    patientName: "Ashley Ramirez",
     age: 22,
     situation:
-      "The patient developed a sudden racing heartbeat during exercise and says the sensation started abruptly and has not stopped.",
+      "Ashley experiences a sudden onset of palpitations while studying and presents with a very rapid heart rate.",
     findings: [
       "Very rapid regular pulse",
       "No obvious chest trauma or fever",
@@ -81,10 +81,10 @@ const SCENARIO_CONTENT = {
     ],
   },
   wpw: {
-    patientName: "Dylan Foster",
+    patientName: "Jason Patel",
     age: 19,
     situation:
-      "The patient has a history of episodic palpitations and presents after a sudden onset of rapid heartbeat during basketball practice.",
+      "Jason presents with intermittent palpitations, and his ECG shows an abnormal early conduction pattern.",
     findings: [
       "Young patient with recurrent tachyarrhythmia symptoms",
       "Episodes begin and end suddenly",
