@@ -64,6 +64,42 @@ function panelShellStyle(width, isCollapsed) {
   };
 }
 
+function PlayIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path d="M4 3.2 L10.4 7 L4 10.8 Z" fill="currentColor" />
+    </svg>
+  );
+}
+
+function PauseIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <rect x="3.2" y="3" width="2.6" height="8" rx="1" fill="currentColor" />
+      <rect x="8.2" y="3" width="2.6" height="8" rx="1" fill="currentColor" />
+    </svg>
+  );
+}
+
+function SpeedIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M2.5 9.5 A4.5 4.5 0 1 1 11.5 9.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M7 7 L9.8 5.1"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
 export default function EKGWaveforms() {
   const [selectedRhythmId, setSelectedRhythmId] = useState(RHYTHMS[0]?.id ?? "");
   const [isPlaying, setIsPlaying] = useState(true);
@@ -249,62 +285,120 @@ export default function EKGWaveforms() {
           <div
             style={{
               display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
-              gap: 12,
               justifyContent: "center",
               paddingTop: 6,
             }}
           >
-            <button
-              type="button"
-              className="sidebar__btn"
-              style={{ width: "auto", marginTop: 0, paddingInline: 22 }}
-              onClick={() => setIsPlaying(true)}
-              disabled={isPlaying}
-            >
-              Play
-            </button>
-
-            <button
-              type="button"
-              className="sidebar__btn sidebar__btn--ghost"
-              style={{ width: "auto", marginTop: 0, paddingInline: 22 }}
-              onClick={() => setIsPlaying(false)}
-              disabled={!isPlaying}
-            >
-              Pause
-            </button>
-
-            <label
+            <div
               style={{
                 display: "flex",
+                flexWrap: "wrap",
                 alignItems: "center",
-                gap: 10,
-                color: "rgba(255,255,255,0.8)",
-                fontSize: 14,
+                justifyContent: "center",
+                gap: 14,
+                width: "100%",
+                maxWidth: 620,
+                borderRadius: 20,
+                border: "1px solid rgba(255,255,255,0.10)",
+                background:
+                  "linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03))",
+                boxShadow:
+                  "inset 0 0 0 1px rgba(255,255,255,0.03), 0 14px 28px rgba(0,0,0,0.22)",
+                padding: "16px 18px",
               }}
             >
-              <span>Speed</span>
-              <select
-                value={speed}
-                onChange={(event) => setSpeed(Number(event.target.value))}
+              <button
+                type="button"
+                className="sidebar__btn"
                 style={{
-                  borderRadius: 12,
-                  border: "1px solid rgba(255,255,255,0.12)",
-                  background: "rgba(255,255,255,0.06)",
-                  color: "rgba(255,255,255,0.92)",
-                  padding: "10px 12px",
-                  font: "inherit",
+                  width: "auto",
+                  marginTop: 0,
+                  padding: "12px 22px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  background: isPlaying
+                    ? "linear-gradient(135deg, rgba(64,201,128,0.3), rgba(126,240,165,0.2))"
+                    : "rgba(255,255,255,0.05)",
+                  boxShadow: isPlaying
+                    ? "0 0 0 1px rgba(126,240,165,0.18) inset, 0 10px 24px rgba(64,201,128,0.18)"
+                    : "none",
+                  borderColor: isPlaying
+                    ? "rgba(126,240,165,0.34)"
+                    : "rgba(255,255,255,0.14)",
+                  color: isPlaying ? "#7ef0a5" : "rgba(255,255,255,0.88)",
+                }}
+                onClick={() => setIsPlaying(true)}
+                disabled={isPlaying}
+              >
+                <PlayIcon />
+                <span>Play</span>
+              </button>
+
+              <button
+                type="button"
+                className="sidebar__btn sidebar__btn--ghost"
+                style={{
+                  width: "auto",
+                  marginTop: 0,
+                  padding: "12px 20px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  background: !isPlaying
+                    ? "linear-gradient(135deg, rgba(64,201,128,0.3), rgba(126,240,165,0.2))"
+                    : "rgba(255,255,255,0.05)",
+                  color: !isPlaying ? "#7ef0a5" : "rgba(255,255,255,0.88)",
+                  borderColor: !isPlaying
+                    ? "rgba(126,240,165,0.34)"
+                    : "rgba(255,255,255,0.14)",
+                  boxShadow: !isPlaying
+                    ? "0 0 0 1px rgba(126,240,165,0.18) inset, 0 10px 24px rgba(64,201,128,0.18)"
+                    : "none",
+                }}
+                onClick={() => setIsPlaying(false)}
+                disabled={!isPlaying}
+              >
+                <PauseIcon />
+                <span>Pause</span>
+              </button>
+
+              <label
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  color: "rgba(255,255,255,0.84)",
+                  fontSize: 14,
+                  padding: "12px 14px",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  background: "rgba(0,0,0,0.14)",
                 }}
               >
-                {SPEED_OPTIONS.map((option) => (
-                  <option key={option} value={option} style={{ color: "#111" }}>
-                    {option}x
-                  </option>
-                ))}
-              </select>
-            </label>
+                <SpeedIcon />
+                <span>Speed</span>
+                <select
+                  value={speed}
+                  onChange={(event) => setSpeed(Number(event.target.value))}
+                  style={{
+                    borderRadius: 12,
+                    border: "1px solid rgba(255,255,255,0.12)",
+                    background: "rgba(255,255,255,0.08)",
+                    color: "rgba(255,255,255,0.92)",
+                    padding: "10px 12px",
+                    font: "inherit",
+                    minWidth: 82,
+                  }}
+                >
+                  {SPEED_OPTIONS.map((option) => (
+                    <option key={option} value={option} style={{ color: "#111" }}>
+                      {option}x
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
           </div>
         </div>
 
