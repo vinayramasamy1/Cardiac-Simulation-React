@@ -18,6 +18,18 @@ export default function Home() {
 
           <Link
             className="home-tile"
+            to="/ekg-waveforms"
+            role="listitem"
+            aria-label="Open EKG Waveforms"
+          >
+            <div className="home-tile__box">
+              <img className="home-tile__icon" src="/assets/icon-ekg-waveforms.svg" alt="" />
+            </div>
+            <div className="home-tile__label">EKG Waveforms</div>
+          </Link>
+
+          <Link
+            className="home-tile"
             to="/case-studies"
             role="listitem"
             aria-label="Open Case Studies"
