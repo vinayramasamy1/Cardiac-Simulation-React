@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import ECGWaveform from "../components/ECGWaveform.jsx";
 import { RHYTHMS } from "../data/rhythms.js";
 
@@ -100,6 +100,48 @@ function SpeedIcon() {
   );
 }
 
+function ResetIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+      <path
+        d="M3.2 6.2 A3.9 3.9 0 1 1 4.1 9.9"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      <path
+        d="M3.1 3.4 V6.3 H6"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function formatBpmDisplay(bpmConfig, speed) {
+  if (!bpmConfig) {
+    return { primary: "--", secondary: "BPM unavailable" };
+  }
+
+  if (bpmConfig.type === "unstable") {
+    return { primary: "Chaotic", secondary: bpmConfig.label };
+  }
+
+  if (bpmConfig.type === "range") {
+    return {
+      primary: `${Math.round(bpmConfig.min * speed)}-${Math.round(bpmConfig.max * speed)}`,
+      secondary: speed === 1 ? "Estimated ventricular response" : `Adjusted for ${speed}x speed`,
+    };
+  }
+
+  return {
+    primary: `${Math.round(bpmConfig.value * speed)}`,
+    secondary: speed === 1 ? "Monitor rate" : `Adjusted for ${speed}x speed`,
+  };
+}
+
 export default function EKGWaveforms() {
   const [selectedRhythmId, setSelectedRhythmId] = useState(RHYTHMS[0]?.id ?? "");
   const [isPlaying, setIsPlaying] = useState(true);
@@ -110,9 +152,18 @@ export default function EKGWaveforms() {
   const selectedRhythm =
     RHYTHMS.find((rhythm) => rhythm.id === selectedRhythmId) || RHYTHMS[0];
   const selectedRhythmDetails = RHYTHM_DETAILS[selectedRhythm?.id] || [];
+  const bpmDisplay = useMemo(
+    () => formatBpmDisplay(selectedRhythm?.bpm, speed),
+    [selectedRhythm, speed]
+  );
 
   function handleSelectRhythm(rhythmId) {
     setSelectedRhythmId(rhythmId);
+    setIsPlaying(true);
+    setSpeed(1);
+  }
+
+  function handleResetView() {
     setIsPlaying(true);
     setSpeed(1);
   }
@@ -260,7 +311,35 @@ export default function EKGWaveforms() {
               <h2 className="sim-title">{selectedRhythm?.name}</h2>
               <div className="sim-meta">{selectedRhythm?.description}</div>
             </div>
-            <div className="badge">Waveform • {selectedRhythm?.tag}</div>
+
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", justifyContent: "flex-end" }}>
+              <div className="badge">Waveform | {selectedRhythm?.tag}</div>
+              <div
+                style={{
+                  minWidth: 124,
+                  padding: "10px 12px",
+                  borderRadius: 16,
+                  border: "1px solid rgba(126,240,165,0.18)",
+                  background: "rgba(126,240,165,0.08)",
+                  boxShadow: "0 0 0 1px rgba(126,240,165,0.06) inset",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "rgba(255,255,255,0.56)",
+                    marginBottom: 4,
+                  }}
+                >
+                  BPM
+                </div>
+                <div style={{ fontSize: 24, fontWeight: 700, color: "#7ef0a5", lineHeight: 1 }}>
+                  {bpmDisplay.primary}
+                </div>
+              </div>
+            </div>
           </div>
 
           <div
@@ -297,7 +376,7 @@ export default function EKGWaveforms() {
                 justifyContent: "center",
                 gap: 14,
                 width: "100%",
-                maxWidth: 620,
+                maxWidth: 760,
                 borderRadius: 20,
                 border: "1px solid rgba(255,255,255,0.10)",
                 background:
@@ -307,6 +386,35 @@ export default function EKGWaveforms() {
                 padding: "16px 18px",
               }}
             >
+              <div
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  justifyContent: "center",
+                  minWidth: 166,
+                  padding: "12px 14px",
+                  borderRadius: 16,
+                  border: "1px solid rgba(255,255,255,0.10)",
+                  background: "rgba(0,0,0,0.14)",
+                  color: "rgba(255,255,255,0.84)",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: 11,
+                    textTransform: "uppercase",
+                    letterSpacing: "0.14em",
+                    color: "rgba(255,255,255,0.5)",
+                  }}
+                >
+                  Readout
+                </div>
+                <div style={{ fontWeight: 700, color: "#7ef0a5" }}>
+                  {bpmDisplay.primary === "Chaotic" ? "Chaotic" : `${bpmDisplay.primary} BPM`}
+                </div>
+              </div>
+
               <button
                 type="button"
                 className="sidebar__btn"
@@ -398,6 +506,26 @@ export default function EKGWaveforms() {
                   ))}
                 </select>
               </label>
+
+              <button
+                type="button"
+                className="sidebar__btn sidebar__btn--ghost"
+                style={{
+                  width: "auto",
+                  marginTop: 0,
+                  padding: "12px 18px",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 10,
+                  background: "rgba(255,255,255,0.05)",
+                  color: "rgba(255,255,255,0.88)",
+                  borderColor: "rgba(255,255,255,0.14)",
+                }}
+                onClick={handleResetView}
+              >
+                <ResetIcon />
+                <span>Reset</span>
+              </button>
             </div>
           </div>
         </div>
@@ -461,6 +589,42 @@ export default function EKGWaveforms() {
                     }}
                   >
                     {selectedRhythm?.description}
+                  </div>
+                </div>
+
+                <div
+                  style={{
+                    marginTop: 12,
+                    borderRadius: 18,
+                    border: "1px solid rgba(126,240,165,0.18)",
+                    background: "rgba(126,240,165,0.08)",
+                    padding: 14,
+                  }}
+                >
+                  <div
+                    style={{
+                      fontSize: 12,
+                      color: "rgba(255,255,255,0.5)",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.14em",
+                      marginBottom: 8,
+                    }}
+                  >
+                    BPM Readout
+                  </div>
+                  <div style={{ fontSize: 28, fontWeight: 700, color: "#7ef0a5", lineHeight: 1 }}>
+                    {bpmDisplay.primary}
+                    {bpmDisplay.primary === "Chaotic" ? "" : " BPM"}
+                  </div>
+                  <div
+                    style={{
+                      marginTop: 6,
+                      color: "rgba(255,255,255,0.72)",
+                      fontSize: 13,
+                      lineHeight: 1.5,
+                    }}
+                  >
+                    {bpmDisplay.secondary}
                   </div>
                 </div>
 
