@@ -2,6 +2,97 @@
 import React, { useMemo, useState } from "react";
 import { RHYTHMS } from "../data/rhythms.js";
 
+const SCENARIO_CONTENT = {
+  "normal-sinus": {
+    patientName: "Jordan Ellis",
+    age: 34,
+    situation:
+      "The patient reports mild chest fluttering after a stressful shift but is alert, speaking clearly, and hemodynamically stable on arrival.",
+    findings: [
+      "Skin warm and dry with no respiratory distress",
+      "Regular pulse and normal mentation",
+      "No active chest pain at the time of assessment",
+    ],
+  },
+  "atrial-fibrillation": {
+    patientName: "Maria Lopez",
+    age: 71,
+    situation:
+      "The patient describes sudden palpitations, fatigue, and mild shortness of breath that began earlier this morning while walking to the kitchen.",
+    findings: [
+      "Irregular pulse noted at the wrist",
+      "Reports intermittent dizziness with exertion",
+      "History of hypertension and prior episodes of AFib",
+    ],
+  },
+  "ventricular-fibrillation": {
+    patientName: "Thomas Reed",
+    age: 58,
+    situation:
+      "Bystanders report the patient collapsed without warning. CPR is in progress on crew arrival and the patient is unresponsive.",
+    findings: [
+      "No palpable pulse",
+      "Apneic and unresponsive",
+      "Immediate defibrillation and resuscitation indicated",
+    ],
+  },
+  "atrial-flutter": {
+    patientName: "Avery Patel",
+    age: 66,
+    situation:
+      "The patient complains of a racing heartbeat and mild chest pressure after climbing a flight of stairs, but remains awake and oriented.",
+    findings: [
+      "Rapid but organized rhythm appearance",
+      "Mild shortness of breath during movement",
+      "Blood pressure remains stable during initial assessment",
+    ],
+  },
+  "sinus-tachycardia": {
+    patientName: "Ethan Brooks",
+    age: 27,
+    situation:
+      "The patient is anxious, febrile, and dehydrated after several hours of vomiting, with a fast pulse that increases further when standing.",
+    findings: [
+      "Regular rapid pulse",
+      "Dry mucous membranes and delayed capillary refill",
+      "Likely physiologic response to stress or dehydration",
+    ],
+  },
+  "ventricular-tachycardia": {
+    patientName: "Samuel Grant",
+    age: 64,
+    situation:
+      "The patient reports severe palpitations and near-syncope while seated, with increasing weakness and a sense that he may pass out.",
+    findings: [
+      "Rapid wide-complex rhythm suspected",
+      "Cool skin and reduced perfusion signs",
+      "Mental status beginning to decline with ongoing symptoms",
+    ],
+  },
+  "supraventricular-tachycardia": {
+    patientName: "Chloe Nguyen",
+    age: 22,
+    situation:
+      "The patient developed a sudden racing heartbeat during exercise and says the sensation started abruptly and has not stopped.",
+    findings: [
+      "Very rapid regular pulse",
+      "No obvious chest trauma or fever",
+      "Patient is anxious but still alert and responsive",
+    ],
+  },
+  wpw: {
+    patientName: "Dylan Foster",
+    age: 19,
+    situation:
+      "The patient has a history of episodic palpitations and presents after a sudden onset of rapid heartbeat during basketball practice.",
+    findings: [
+      "Young patient with recurrent tachyarrhythmia symptoms",
+      "Episodes begin and end suddenly",
+      "Accessory pathway pattern is a key teaching consideration",
+    ],
+  },
+};
+
 function rhythmToScenarioPath(rhythmId) {
   return `/assets/casestudypngs/${rhythmId}-scenario.png`;
 }
@@ -51,25 +142,44 @@ export default function CaseStudies() {
 
   const renderCanvasContent = () => {
     if (resolvedView === "scenario") {
-      if (hasScenarioImage) {
-        return (
-          <div className="cs-view-content">
-            <div className="cs-media-wrap">
-              <img
-                className="cs-media-image"
-                src={active.scenarioImage}
-                alt={`${active.rhythmName} patient scenario`}
-              />
-            </div>
-          </div>
-        );
-      }
+      const scenario = SCENARIO_CONTENT[active.id];
 
       return (
         <div className="cs-view-content">
-          <div className="cs-view-placeholder">
-            Add this file to enable Patient Scenario:
-            <span>{active.scenarioImage}</span>
+          <div className="cs-scenario-board">
+            <div className="cs-scenario-card cs-scenario-card--title">
+              <div className="cs-scenario-section-label">Rhythm</div>
+              <h3 className="cs-scenario-rhythm">{active.rhythmName}</h3>
+              <div className="cs-scenario-tag">{active.meta}</div>
+            </div>
+
+            <div className="cs-scenario-grid">
+              <div className="cs-scenario-card">
+                <div className="cs-scenario-section-label">Patient Information</div>
+                <div className="cs-scenario-info-row">
+                  <span>Name</span>
+                  <strong>{scenario.patientName}</strong>
+                </div>
+                <div className="cs-scenario-info-row">
+                  <span>Age</span>
+                  <strong>{scenario.age} years</strong>
+                </div>
+              </div>
+
+              <div className="cs-scenario-card">
+                <div className="cs-scenario-section-label">Situation</div>
+                <p className="cs-scenario-copy">{scenario.situation}</p>
+              </div>
+            </div>
+
+            <div className="cs-scenario-card cs-scenario-card--fill">
+              <div className="cs-scenario-section-label">Key Findings</div>
+              <ul className="cs-scenario-list">
+                {scenario.findings.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       );
