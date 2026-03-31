@@ -72,6 +72,26 @@ function ReviewsHome() {
               <div className="review-tile__desc">{category.description}</div>
             </Link>
           ))}
+
+          <Link
+            className="home-tile"
+            to="/real-time-mode"
+            role="listitem"
+            aria-label="Open Real Time Mode"
+          >
+            <div className="home-tile__box review-tile__box">
+              <img
+                className="home-tile__icon home-tile__icon--large"
+                src="/assets/icon-real-time-mode.svg"
+                alt=""
+              />
+            </div>
+
+            <div className="home-tile__label">Real Time Mode</div>
+            <div className="review-tile__desc">
+              Open a starter simulation layout for future live cardiac scenarios.
+            </div>
+          </Link>
         </div>
       </div>
     </section>

@@ -8,6 +8,7 @@ import EKGWaveforms from "./pages/EKGWaveforms.jsx";
 import Sim from "./pages/Sim.jsx";
 import CaseStudies from "./pages/CaseStudies.jsx";
 import Reviews from "./pages/Reviews.jsx";
+import RealTimeMode from "./pages/RealTimeMode.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
         <Route path="/case-studies" element={<CaseStudies />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/reviews/:category" element={<Reviews />} />
+        <Route path="/real-time-mode" element={<RealTimeMode />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Shell>
