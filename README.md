@@ -1,80 +1,190 @@
-# Cardiac Simulation Learning Tool
+# Cardiac Simulation React
 
-An interactive, web-based cardiac rhythm and case study learning tool designed for educational use by emergency medicine and fire department trainees.
+A React + Vite cardiac training application built for educational use in emergency medical and fire department learning environments. The app combines cardiac rhythm exploration, live ECG waveform visualization, case-based practice, quiz reviews, and time-sensitive decision training in a single interface.
 
-This project provides a modern, intuitive interface for exploring cardiac rhythms, working through clinical case studies, and completing review activities in a clean, distraction-free environment.
+Designed as a portfolio-ready front-end project, Cardiac Simulation React focuses on real-time cardiac simulation concepts, ECG recognition, structured patient scenarios, and an immersive UI optimized for repeated practice.
 
----
+## 🚀 Features
 
-## 🔥 Project Overview
+- Real-time simulation mode with timed clinical decision phases and branching patient outcomes
+- Live ECG waveform visualization using animated SVG rendering for supported cardiac rhythms
+- Dedicated EKG Waveforms page with:
+  - Rhythm selection sidebar
+  - Collapsible left and right panels
+  - Play, pause, speed, and reset controls
+  - BPM readout and rhythm-specific characteristics
+- Interactive review quizzes with instant correct/incorrect feedback
+- Rhythm library featuring:
+  - Normal Sinus Rhythm
+  - Atrial Fibrillation
+  - Ventricular Fibrillation
+  - Atrial Flutter
+  - Sinus Tachycardia
+  - Ventricular Tachycardia
+  - Supraventricular Tachycardia
+  - Wolff-Parkinson-White (WPW)
+- Rhythm cards that open dedicated simulator modules
+- Case Studies workspace with:
+  - Selectable case list
+  - Structured patient scenario view
+  - Treatment image support
+  - Consistent canvas sizing between scenario and treatment views
+- Real Time Mode scenarios currently included:
+  - Ventricular Fibrillation Arrest
+  - Supraventricular Tachycardia
+  - Sinus Tachycardia
+- Action summaries, timer-based progression, restart controls, and scenario switching
+- Shared application shell with top navigation, collapsible rhythm sidebar, and route-based layout
+- Responsive layouts for dashboard cards, quizzes, simulation views, and case-study panels
+- Modern UI styling with glassmorphism panels, highlighted active states, and training-focused visual hierarchy
 
-**Scottsdale Fire Dept. – Cardiac Simulator Learning Tool** is a front-end educational web application built with HTML, CSS, and JavaScript.
+## 🆕 Recent Improvements
 
-The goal of this project is to enhance learning through:
-- Visual rhythm recognition
-- Structured clinical case studies
-- Clear navigation and focused UI design
+- Added Real Time Mode for time-sensitive cardiac intervention scenarios
+- Added animated ECG waveform rendering for multiple rhythm types
+- Added BPM display logic with fixed, ranged, and unstable rhythm handling
+- Added waveform playback controls including play, pause, speed selection, and reset
+- Improved EKG Waveforms behavior so changing rhythms resets playback to playing at 1x speed
+- Improved active control highlighting so only one of Play or Pause is active at a time
+- Expanded Reviews into interactive quiz categories plus a Real Time Mode entry point
+- Enhanced Case Studies with structured patient information, situation, and key findings panels
+- Updated layouts to support balanced 4-card rows on Home and Reviews
+- Improved scenario reset logic in Real Time Mode to safely switch scenarios without crashes
 
-The application is designed to be **view-only**, lightweight, and easily accessible without logins or downloads.
+## 🛠 Tech Stack
 
----
+- React 19
+- Vite 7
+- React Router DOM 7
+- JavaScript (ES Modules)
+- CSS3
+- SVG-based waveform rendering and icon assets
+- ESLint for linting
+- Vercel for deployment
 
-## 🫀 Features
+## 📸 Screenshots
 
-### Rhythms
-- Sidebar navigation with common cardiac rhythms
-- Full rhythm names with short-form labels (e.g., NSR, AFib, VFib)
-- Collapsible sidebar with centered short-form indicators
-- Clean, consistent UI optimized for learning
+Add project screenshots here for a stronger GitHub presentation.
 
-### Case Studies
-- Dedicated case study workspace
-- Selectable Case Study 1–8
-- Large viewing window for future ECGs, images, or animations
-- Condition overview / description section
-- Collapsible sidebar with streamlined controls
+- `docs/screenshots/home.png` - Home dashboard
+- `docs/screenshots/ekg-waveforms.png` - Live ECG waveform viewer
+- `docs/screenshots/case-studies.png` - Case study workspace
+- `docs/screenshots/reviews.png` - Interactive review quizzes
+- `docs/screenshots/real-time-mode.png` - Real-time simulation mode
 
-### Reviews
-- Placeholder section for future review content
-- Designed for quizzes, checklists, or skill validation modules
+Example Markdown once images are available:
 
----
+```md
+![Home Dashboard](docs/screenshots/home.png)
+![EKG Waveform Viewer](docs/screenshots/ekg-waveforms.png)
+```
 
-## 🖥️ Tech Stack
+## ⚙️ Installation & Setup
 
-- **HTML5**
-- **CSS3**
-- **JavaScript (React Framework)**
-- SVG icons for scalable, crisp UI graphics 
+### Prerequisites
 
----
+- Node.js 18+ recommended
+- npm
 
-## 🎯 Intended Use
+### Clone and install
 
-This project is intended for educational and training purposes, including:
-- Classroom demonstrations
-- Student learning and practice
-- UI/UX prototyping for medical education tools
+```bash
+git clone https://github.com/your-username/cardiac-simulation-react.git
+cd cardiac-simulation-react
+npm install
+```
 
-This application is **not** a diagnostic tool and should not be used for real-world clinical decision-making.
+### Run locally
 
----
+Vite development server:
 
-## 📌 Current Status
+```bash
+npm run dev
+```
 
-- Core user interface and navigation complete
-- Rhythms section implemented with collapsible sidebar
-- Case Studies framework in place (Cases 1–8)
-- Review section scaffolded for future use
-- Design and layout finalized for instructional use
-- Future enhancements planned (animations, interactive ECGs, assessments)
+If you use an `npm start` alias in your local workflow, point it to the Vite dev server:
 
----
+```bash
+npm start
+```
 
-## 📄 License
+### Production build
 
-This project is provided for **educational purposes only**.
+```bash
+npm run build
+```
 
-All content is intended for learning and demonstration and is not a substitute for professional medical training or clinical judgment.
+### Preview production build
 
+```bash
+npm run preview
+```
 
+### Lint
+
+```bash
+npm run lint
+```
+
+## 🌐 Live Demo
+
+[https://cardiac-simulation-react.vercel.app/](https://cardiac-simulation-react.vercel.app/)
+
+## 📂 Project Structure
+
+```text
+src/
+  components/
+    ECGWaveform.jsx
+    RhythmCard.jsx
+  data/
+    realTimeScenarios.js
+    reviewQuestions.js
+    rhythms.js
+  layout/
+    Shell.jsx
+    Sidebar.jsx
+    Topbar.jsx
+  pages/
+    Home.jsx
+    Rhythms.jsx
+    EKGWaveforms.jsx
+    CaseStudies.jsx
+    Reviews.jsx
+    RealTimeMode.jsx
+    Sim.jsx
+    NotFound.jsx
+  styles/
+    main.css
+    case-studies.css
+```
+
+### Key App Areas
+
+- `Home` provides the main dashboard entry points
+- `Rhythms` presents the rhythm card library
+- `EKGWaveforms` contains the animated ECG viewer and playback controls
+- `Sim` hosts per-rhythm simulator modules
+- `CaseStudies` delivers structured patient scenarios and treatment visuals
+- `Reviews` contains category-based quizzes with instant feedback
+- `RealTimeMode` runs timed branching simulations with waveform support
+
+## 🧠 Future Improvements
+
+- Add more cardiac rhythms, arrest pathways, and treatment scenarios
+- Introduce additional simulation controls such as rate, conduction, and intervention modifiers
+- Add instructor mode or guided learning prompts
+- Expand quiz analytics with scoring history and performance summaries
+- Track learner progress across rhythms, quizzes, and scenarios
+- Add audio cues, monitor alarms, and more immersive simulation feedback
+- Integrate AI-assisted case generation or clinical decision coaching
+- Add backend persistence for saved sessions and training data
+- Support team-based simulation workflows and debrief notes
+
+## 👤 Author
+
+**Vinay Ramasamy**
+
+## Disclaimer
+
+This project is intended for educational and training purposes only. It is not a diagnostic device and should not be used for real-world clinical decision-making.
