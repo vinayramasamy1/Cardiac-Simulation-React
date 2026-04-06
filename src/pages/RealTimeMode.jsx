@@ -15,6 +15,12 @@ const STATUS_STYLES = {
     background: "rgba(255,212,121,0.12)",
     borderColor: "rgba(255,212,121,0.24)",
   },
+  urgent: {
+    label: "Urgent",
+    color: "#ffb36b",
+    background: "rgba(255,179,107,0.12)",
+    borderColor: "rgba(255,179,107,0.26)",
+  },
   critical: {
     label: "Critical",
     color: "#ff9c9c",
