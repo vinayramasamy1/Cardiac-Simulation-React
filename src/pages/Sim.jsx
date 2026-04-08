@@ -7,21 +7,6 @@ export default function Sim() {
 
   const rhythm = useMemo(() => RHYTHMS.find((x) => x.id === id), [id]);
 
-  // Only show the MP4 in Normal Sinus Rhythm
-  const isNSR = useMemo(() => {
-    if (!rhythm) return false;
-
-    const rid = String(rhythm.id || "").trim().toUpperCase();
-    const rtag = String(rhythm.tag || "").trim().toUpperCase();
-    const rname = String(rhythm.name || "").trim().toLowerCase();
-
-    return (
-      rid === "NSR" ||
-      rtag === "NSR" ||
-      rname.includes("normal sinus")
-    );
-  }, [rhythm]);
-
   if (!rhythm) {
     return (
       <section className="page">
@@ -47,30 +32,18 @@ export default function Sim() {
 
       <div className="sim-grid">
         <div className="canvas" aria-label="Rhythm animation area">
-          {isNSR ? (
-            <>
-              <video
-                className="canvas__video"
-                src="/videos/nsr.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-              />
-              <div className="canvas__label">NSR Animation</div>
-            </>
-          ) : (
-            <div className="canvas__placeholder">
-              <div>
-                <strong>Animation / 3D Area (placeholder)</strong>
-                <br />
-                Drop in Blender renders, a WebGL viewer (GLB), or a rhythm animation later.
-                <br />
-                This layout is already sized and styled for it.
-              </div>
-            </div>
-          )}
+          <>
+            <video
+              className="canvas__video"
+              src="/videos/test.mp4"
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="metadata"
+            />
+            <div className="canvas__label">{rhythm.tag} Animation</div>
+          </>
         </div>
 
         <aside className="panel" aria-label="Module info panel">
