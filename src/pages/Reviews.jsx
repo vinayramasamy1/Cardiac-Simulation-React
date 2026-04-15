@@ -8,6 +8,7 @@ function QuizBubble({
   choices,
   selected,
   status,
+  feedback,
   onSelect,
 }) {
   return (
@@ -24,20 +25,23 @@ function QuizBubble({
 
       <div className="quiz-bubble__choices">
         {choices.map((choice) => {
-          const isSelected = selected === choice;
+          const choiceText = typeof choice === "string" ? choice : choice.text;
+          const isSelected = selected === choiceText;
 
           return (
             <button
-              key={choice}
+              key={choiceText}
               type="button"
               className={`quiz-choice ${isSelected ? "quiz-choice--selected" : ""}`}
               onClick={() => onSelect(choice)}
             >
-              {choice}
+              {choiceText}
             </button>
           );
         })}
       </div>
+
+      {feedback ? <div className="quiz-feedback">{feedback}</div> : null}
     </article>
   );
 }
@@ -112,6 +116,7 @@ function ReviewQuiz({ categoryId }) {
     questions.map(() => ({
       selected: "",
       status: "idle",
+      feedback: "",
     }));
 
   const [answers, setAnswers] = useState(createInitialAnswers);
@@ -123,11 +128,19 @@ function ReviewQuiz({ categoryId }) {
   function handleSelect(index, choice) {
     setAnswers((prev) => {
       const updated = [...prev];
-      const isCorrect = choice === questions[index].correctAnswer;
+      const selectedText = typeof choice === "string" ? choice : choice.text;
+      const isCorrect = selectedText === questions[index].correctAnswer;
+      const feedback =
+        (typeof choice === "object" && choice.feedback) ||
+        questions[index].feedbackByChoice?.[selectedText] ||
+        (isCorrect
+          ? "Correct. This is the best answer."
+          : `Not quite. Review why ${questions[index].correctAnswer} is the best answer.`);
 
       updated[index] = {
-        selected: choice,
+        selected: selectedText,
         status: isCorrect ? "correct" : "wrong",
+        feedback,
       };
 
       return updated;
@@ -187,6 +200,7 @@ function ReviewQuiz({ categoryId }) {
             choices={item.choices}
             selected={answers[index]?.selected || ""}
             status={answers[index]?.status || "idle"}
+            feedback={answers[index]?.feedback || ""}
             onSelect={(choice) => handleSelect(index, choice)}
           />
         ))}
