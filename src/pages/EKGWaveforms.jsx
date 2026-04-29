@@ -24,6 +24,11 @@ const RHYTHM_DETAILS = {
     "More regular than atrial fibrillation",
     "Narrow QRS complexes can still appear at intervals",
   ],
+  "ectopic-atrial-rhythm": [
+    "Regular atrial rhythm with P waves before each narrow QRS complex",
+    "P-wave morphology differs from normal sinus rhythm because the pacemaker focus is outside the SA node",
+    "Often remains stable when the rate is controlled and symptoms are mild",
+  ],
   "sinus-tachycardia": [
     "Sinus pattern remains present but the rate is faster",
     "Shorter distance between repeating complexes",

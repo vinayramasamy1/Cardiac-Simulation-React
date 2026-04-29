@@ -31,7 +31,6 @@ export const RHYTHMS = [
     description: "Rapid atrial rhythm showing classic sawtooth flutter waves.",
     bpm: { type: "fixed", value: 150 },
   },
-
   {
     id: "sinus-tachycardia",
     name: "Sinus Tachycardia",
@@ -65,5 +64,14 @@ export const RHYTHMS = [
     image: "/assets/ecg/wpw.jpg",
     description: "Accessory pathway causing pre-excitation and rapid tachyarrhythmias.",
     bpm: { type: "fixed", value: 95 },
+  },
+  {
+    id: "ectopic-atrial-rhythm",
+    name: "Ectopic Atrial Rhythm",
+    tag: "EAR",
+    image: "/assets/ecg/normal-sinus.jpg",
+    description:
+      "An atrial rhythm originating outside the sinus node, often identified by abnormal P-wave morphology with a generally regular rhythm.",
+    bpm: { type: "fixed", value: 82 },
   },
 ];

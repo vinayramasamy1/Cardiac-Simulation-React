@@ -111,6 +111,28 @@ const WAVEFORM_PATTERNS = {
       [156, 90],
     ],
   },
+  "ectopic-atrial-rhythm": {
+    cycleWidth: 184,
+    points: [
+      [0, BASELINE_Y],
+      [18, BASELINE_Y],
+      [28, 96],
+      [38, 102],
+      [50, 95],
+      [60, BASELINE_Y],
+      [76, BASELINE_Y],
+      [88, 98],
+      [94, 34],
+      [100, 138],
+      [108, 90],
+      [122, BASELINE_Y],
+      [138, 86],
+      [152, 80],
+      [166, 85],
+      [176, 90],
+      [184, BASELINE_Y],
+    ],
+  },
   "sinus-tachycardia": {
     cycleWidth: 126,
     points: [

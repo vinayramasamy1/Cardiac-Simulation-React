@@ -47,6 +47,17 @@ const SCENARIO_CONTENT = {
       "Blood pressure remains stable during initial assessment",
     ],
   },
+  "ectopic-atrial-rhythm": {
+    patientName: "Maria Lopez",
+    age: 54,
+    situation:
+      "Maria reports intermittent palpitations and mild fatigue. She denies chest pain or syncope, and her vitals are stable with HR 82 bpm, BP 126/78, SpO2 98%, and RR 16.",
+    findings: [
+      "Regular rhythm with abnormal P-wave morphology before each narrow QRS complex",
+      "Rhythm originates from an atrial focus outside the SA node and is usually stable when symptoms are controlled",
+      "Assess symptoms, monitor the rhythm, and review medications or electrolytes if clinically appropriate",
+    ],
+  },
   "sinus-tachycardia": {
     patientName: "Samantha Lee",
     age: 45,
