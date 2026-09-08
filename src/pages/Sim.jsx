@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { RHYTHMS } from "../data/rhythms.js";
+import { RHYTHM_VIDEO_PATHS } from "../data/rhythmVideos.js";
 
 const SPEED_OPTIONS = [1, 0.75, 0.5, 0.25];
 
@@ -10,7 +11,7 @@ export default function Sim() {
   const [playbackRate, setPlaybackRate] = useState(1);
 
   const rhythm = useMemo(() => RHYTHMS.find((x) => x.id === id), [id]);
-  const videoSrc = rhythm?.id === "atrial-fibrillation" ? "/videos/afib-test.mp4" : "/videos/test.mp4";
+  const videoSrc = RHYTHM_VIDEO_PATHS[rhythm?.id];
 
   useEffect(() => {
     if (videoRef.current) {
