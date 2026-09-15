@@ -1,8 +1,46 @@
 import React, { useMemo, useState } from "react";
 import ECGWaveform from "../components/ECGWaveform.jsx";
+import { computeAtrialFlutterBpm } from "../components/atrialFlutterPattern.js";
 import { RHYTHMS } from "../data/rhythms.js";
 
 const SPEED_OPTIONS = [0.5, 1, 1.5, 2];
+// Number of non-conducted flutter waves between QRS complexes (1 = 2:1
+// block, 2 = 3:1 block, etc). Ventricular rate = 300 / (humps + 1).
+const FLUTTER_HUMP_OPTIONS = [1, 2, 3, 4];
+
+// Renders "numerator / denominator" as a stacked fraction with a divider
+// line, wrapping instead of overflowing its container when the text is long.
+function Fraction({ numerator, denominator }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        minWidth: 0,
+        maxWidth: "100%",
+        fontFamily: "Georgia, 'Times New Roman', serif",
+        fontStyle: "italic",
+      }}
+    >
+      <div style={{ maxWidth: "100%", wordBreak: "break-word", textAlign: "center", padding: "0 4px" }}>
+        {numerator}
+      </div>
+      <div
+        style={{
+          maxWidth: "100%",
+          wordBreak: "break-word",
+          textAlign: "center",
+          borderTop: "1px solid rgba(255,255,255,0.55)",
+          padding: "2px 4px 0",
+        }}
+      >
+        {denominator}
+      </div>
+    </div>
+  );
+}
+
 const RHYTHM_DETAILS = {
   "normal-sinus": [
     "Regular rhythm with an even beat-to-beat spacing",
@@ -23,6 +61,16 @@ const RHYTHM_DETAILS = {
     "Sawtooth flutter waves between ventricular beats",
     "More regular than atrial fibrillation",
     "Narrow QRS complexes can still appear at intervals",
+    "In a conduction ratio like 2:1, the first number is the total flutter waves in each cycle and the second is how many of those conduct through to the ventricles (always 1)",
+    <React.Fragment key="afl-rate-formula">
+      <div>Approximate ventricular rate formula:</div>
+      <Fraction numerator="300" denominator="# of non-conducted flutter waves + 1" />
+      <div>Example (2:1 conduction, 1 non-conducted wave):</div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+        <Fraction numerator="300" denominator="1 + 1" />
+        <span>= 150 bpm</span>
+      </div>
+    </React.Fragment>,
   ],
   "ectopic-atrial-rhythm": [
     "Regular atrial rhythm with P waves before each narrow QRS complex",
@@ -153,24 +201,36 @@ export default function EKGWaveforms() {
   const [speed, setSpeed] = useState(1);
   const [leftCollapsed, setLeftCollapsed] = useState(false);
   const [rightCollapsed, setRightCollapsed] = useState(false);
+  const [flutterHumps, setFlutterHumps] = useState(1);
 
   const selectedRhythm =
     RHYTHMS.find((rhythm) => rhythm.id === selectedRhythmId) || RHYTHMS[0];
+  const isAtrialFlutter = selectedRhythm?.id === "atrial-flutter";
   const selectedRhythmDetails = RHYTHM_DETAILS[selectedRhythm?.id] || [];
-  const bpmDisplay = useMemo(
-    () => formatBpmDisplay(selectedRhythm?.bpm, speed),
-    [selectedRhythm, speed]
-  );
+  const bpmDisplay = useMemo(() => {
+    if (isAtrialFlutter) {
+      const conductedBpm = computeAtrialFlutterBpm(flutterHumps);
+      return {
+        primary: `${Math.round(conductedBpm * speed)}`,
+        secondary: `${flutterHumps + 1}:1 conduction${
+          speed === 1 ? "" : ` · adjusted for ${speed}x speed`
+        }`,
+      };
+    }
+    return formatBpmDisplay(selectedRhythm?.bpm, speed);
+  }, [selectedRhythm, isAtrialFlutter, flutterHumps, speed]);
 
   function handleSelectRhythm(rhythmId) {
     setSelectedRhythmId(rhythmId);
     setIsPlaying(true);
     setSpeed(1);
+    setFlutterHumps(1);
   }
 
   function handleResetView() {
     setIsPlaying(true);
     setSpeed(1);
+    setFlutterHumps(1);
   }
 
   return (
@@ -362,6 +422,7 @@ export default function EKGWaveforms() {
                 isPlaying={isPlaying}
                 speed={speed}
                 height={360}
+                flutterHumps={flutterHumps}
               />
             </div>
           </div>
@@ -512,6 +573,43 @@ export default function EKGWaveforms() {
                 </select>
               </label>
 
+              {isAtrialFlutter ? (
+                <label
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 10,
+                    color: "rgba(255,255,255,0.84)",
+                    fontSize: 14,
+                    padding: "12px 14px",
+                    borderRadius: 16,
+                    border: "1px solid rgba(255,255,255,0.10)",
+                    background: "rgba(0,0,0,0.14)",
+                  }}
+                >
+                  <span>Conduction Ratio</span>
+                  <select
+                    value={flutterHumps}
+                    onChange={(event) => setFlutterHumps(Number(event.target.value))}
+                    style={{
+                      borderRadius: 12,
+                      border: "1px solid rgba(255,255,255,0.12)",
+                      background: "rgba(255,255,255,0.08)",
+                      color: "rgba(255,255,255,0.92)",
+                      padding: "10px 12px",
+                      font: "inherit",
+                      minWidth: 82,
+                    }}
+                  >
+                    {FLUTTER_HUMP_OPTIONS.map((humps) => (
+                      <option key={humps} value={humps} style={{ color: "#111" }}>
+                        {humps + 1}:1
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              ) : null}
+
               <button
                 type="button"
                 className="sidebar__btn sidebar__btn--ghost"
@@ -655,9 +753,9 @@ export default function EKGWaveforms() {
                   </div>
 
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                    {selectedRhythmDetails.map((detail) => (
+                    {selectedRhythmDetails.map((detail, index) => (
                       <div
-                        key={detail}
+                        key={`${selectedRhythm?.id ?? "rhythm"}-${index}`}
                         style={{
                           borderRadius: 14,
                           background: "rgba(255,255,255,0.03)",
@@ -666,6 +764,9 @@ export default function EKGWaveforms() {
                           color: "rgba(255,255,255,0.84)",
                           lineHeight: 1.5,
                           fontSize: 13,
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: 6,
                         }}
                       >
                         {detail}
