@@ -2,8 +2,87 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { RHYTHMS } from "../data/rhythms.js";
 import { RHYTHM_VIDEO_PATHS } from "../data/rhythmVideos.js";
+import ECGWaveform from "../components/ECGWaveform.jsx";
+import RhythmEducationTabs from "../components/RhythmEducationTabs.jsx";
 
 const SPEED_OPTIONS = [1, 0.75, 0.5, 0.25];
+const WAVEFORM_SPEED_OPTIONS = [0.5, 1, 1.5, 2];
+
+function formatBpm(bpm) {
+  if (!bpm) return "--";
+  if (bpm.type === "unstable") return "Chaotic";
+  if (bpm.type === "range") return `${bpm.min}-${bpm.max} BPM`;
+  return `${bpm.value} BPM`;
+}
+
+function SimulatorWaveform({ rhythm }) {
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [speed, setSpeed] = useState(1);
+  const [resetKey, setResetKey] = useState(0);
+
+  function resetWaveform() {
+    setIsPlaying(true);
+    setSpeed(1);
+    setResetKey((key) => key + 1);
+  }
+
+  return (
+    <aside className="sim-waveform-panel" aria-label={`${rhythm.name} EKG waveform`}>
+      <div className="sim-waveform-panel__head">
+        <div>
+          <div className="sim-waveform-panel__eyebrow">EKG Waveform</div>
+          <h2 className="sim-waveform-panel__title">{rhythm.name}</h2>
+        </div>
+        <div className="sim-waveform-panel__readout">
+          <span>{rhythm.tag}</span>
+          <strong>{formatBpm(rhythm.bpm)}</strong>
+        </div>
+      </div>
+
+      <div className="sim-waveform-panel__display">
+        <ECGWaveform
+          key={resetKey}
+          rhythmId={rhythm.id}
+          isPlaying={isPlaying}
+          speed={speed}
+          height={300}
+        />
+      </div>
+
+      <div className="sim-waveform-controls" aria-label="Waveform controls">
+        <button
+          type="button"
+          className={`sim-waveform-control ${isPlaying ? "sim-waveform-control--active" : ""}`}
+          onClick={() => setIsPlaying(true)}
+          disabled={isPlaying}
+        >
+          Play
+        </button>
+        <button
+          type="button"
+          className={`sim-waveform-control ${!isPlaying ? "sim-waveform-control--active" : ""}`}
+          onClick={() => setIsPlaying(false)}
+          disabled={!isPlaying}
+        >
+          Pause
+        </button>
+        <label className="sim-waveform-speed">
+          <span>Speed</span>
+          <select value={speed} onChange={(event) => setSpeed(Number(event.target.value))}>
+            {WAVEFORM_SPEED_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}x
+              </option>
+            ))}
+          </select>
+        </label>
+        <button type="button" className="sim-waveform-control" onClick={resetWaveform}>
+          Reset
+        </button>
+      </div>
+    </aside>
+  );
+}
 
 export default function Sim() {
   const { id } = useParams();
@@ -42,8 +121,8 @@ export default function Sim() {
         <div className="badge">Module • {rhythm.tag}</div>
       </div>
 
-      <div className="sim-grid">
-        <div className="canvas" aria-label="Rhythm animation area">
+      <div className="sim-media-grid">
+        <div className="canvas sim-video-panel" aria-label="Rhythm animation area">
           <>
             <video
               ref={videoRef}
@@ -100,44 +179,14 @@ export default function Sim() {
           </>
         </div>
 
-        <aside className="panel" aria-label="Module info panel">
-          <div className="panel__head">Status</div>
-          <div className="panel__body">
-            <div className="kv">
-              <span>View</span>
-              <strong>Simulator</strong>
-            </div>
-            <div className="kv">
-              <span>Rhythm</span>
-              <strong>{rhythm.tag}</strong>
-            </div>
-            <div className="kv">
-              <span>Controls</span>
-              <strong>Coming soon</strong>
-            </div>
-
-            <div
-              className="panel__head"
-              style={{
-                margin: "10px -14px 0",
-                borderTop: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              Notes
-            </div>
-
-            <div style={{ color: "rgba(255,255,255,0.72)", lineHeight: 1.6, fontSize: 13 }}>
-              Next upgrades you can plug in here:
-              <ul style={{ margin: "10px 0 0 18px", padding: 0 }}>
-                <li>Rate slider / conduction overlay toggles</li>
-                <li>Medication scenarios + outcomes</li>
-                <li>Hotspots for anatomical exploration</li>
-                <li>3D heart (GLB) with guided labels</li>
-              </ul>
-            </div>
-          </div>
-        </aside>
+        <SimulatorWaveform key={rhythm.id} rhythm={rhythm} />
       </div>
+
+      <RhythmEducationTabs
+        key={rhythm.id}
+        rhythmId={rhythm.id}
+        rhythmName={rhythm.name}
+      />
     </section>
   );
 }

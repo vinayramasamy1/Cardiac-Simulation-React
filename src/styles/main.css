@@ -435,10 +435,313 @@ body{
   font-size: 13px;
 }
 
+/* Rhythm simulator media layout (scoped to avoid Real Time Mode) */
+.sim-media-grid{
+  margin-top: 14px;
+  display:grid;
+  grid-template-columns: minmax(0, 58fr) minmax(340px, 42fr);
+  gap: 14px;
+  align-items:start;
+}
+
+.sim-video-panel{
+  width:100%;
+}
+
+.sim-waveform-panel{
+  min-width:0;
+  height:65vh;
+  min-height:520px;
+  padding:20px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,0.10);
+  background:
+    radial-gradient(700px 360px at 25% 15%, rgba(125,49,71,0.24), transparent 58%),
+    rgba(8,8,13,0.82);
+  box-shadow:0 14px 40px rgba(0,0,0,0.35);
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  overflow:hidden;
+}
+
+.sim-waveform-panel__head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+}
+
+.sim-waveform-panel__eyebrow{
+  margin-bottom:6px;
+  color:rgba(255,255,255,0.52);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+.sim-waveform-panel__title{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:clamp(22px, 2vw, 30px);
+  line-height:1.15;
+}
+
+.sim-waveform-panel__readout{
+  flex-shrink:0;
+  padding:9px 11px;
+  border-radius:14px;
+  border:1px solid rgba(126,240,165,0.18);
+  background:rgba(126,240,165,0.08);
+  text-align:right;
+}
+
+.sim-waveform-panel__readout span,
+.sim-waveform-panel__readout strong{
+  display:block;
+}
+
+.sim-waveform-panel__readout span{
+  margin-bottom:4px;
+  color:rgba(255,255,255,0.56);
+  font-size:11px;
+  letter-spacing:0.12em;
+}
+
+.sim-waveform-panel__readout strong{
+  color:#7ef0a5;
+  font-size:15px;
+  white-space:nowrap;
+}
+
+.sim-waveform-panel__display{
+  flex:1;
+  display:flex;
+  align-items:center;
+  min-height:0;
+}
+
+.sim-waveform-controls{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:center;
+  gap:8px;
+}
+
+.sim-waveform-control,
+.sim-waveform-speed{
+  min-height:40px;
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:12px;
+  background:rgba(255,255,255,0.05);
+  color:rgba(255,255,255,0.88);
+  font:inherit;
+  font-size:13px;
+}
+
+.sim-waveform-control{
+  padding:9px 14px;
+  cursor:pointer;
+}
+
+.sim-waveform-control:hover:not(:disabled){
+  background:rgba(255,255,255,0.10);
+}
+
+.sim-waveform-control--active{
+  border-color:rgba(126,240,165,0.34);
+  background:rgba(126,240,165,0.13);
+  color:#7ef0a5;
+}
+
+.sim-waveform-control:disabled{
+  cursor:default;
+  opacity:1;
+}
+
+.sim-waveform-speed{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:5px 7px 5px 11px;
+}
+
+.sim-waveform-speed span{
+  color:rgba(255,255,255,0.66);
+}
+
+.sim-waveform-speed select{
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:9px;
+  background:rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.92);
+  padding:6px 7px;
+  font:inherit;
+}
+
+.sim-waveform-speed option{
+  color:#111;
+}
+
+.rhythm-education{
+  margin-top:16px;
+  border:1px solid rgba(255,255,255,0.10);
+  border-radius:22px;
+  background:
+    radial-gradient(800px 300px at 15% 0%, rgba(125,49,71,0.18), transparent 60%),
+    rgba(255,255,255,0.035);
+  box-shadow:0 16px 36px rgba(0,0,0,0.28);
+  overflow:hidden;
+}
+
+.rhythm-education__heading{
+  padding:18px 20px 14px;
+}
+
+.rhythm-education__eyebrow{
+  margin-bottom:5px;
+  color:rgba(255,255,255,0.5);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+}
+
+.rhythm-education__heading h2{
+  margin:0;
+  font-family:var(--font-display);
+  font-size:26px;
+}
+
+.rhythm-education__tabs{
+  display:flex;
+  gap:6px;
+  padding:0 20px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  overflow-x:auto;
+  scrollbar-width:thin;
+}
+
+.rhythm-education__tab{
+  flex:0 0 auto;
+  margin:0 0 -1px;
+  padding:11px 14px;
+  border:0;
+  border-bottom:2px solid transparent;
+  background:transparent;
+  color:rgba(255,255,255,0.62);
+  font:inherit;
+  font-size:14px;
+  font-weight:650;
+  cursor:pointer;
+}
+
+.rhythm-education__tab:hover{
+  color:rgba(255,255,255,0.9);
+  background:rgba(255,255,255,0.035);
+}
+
+.rhythm-education__tab--active{
+  border-bottom-color:var(--accent2);
+  background:linear-gradient(180deg, transparent, rgba(125,49,71,0.18));
+  color:#fff;
+}
+
+.rhythm-education__tab:focus-visible{
+  outline:2px solid rgba(126,240,165,0.65);
+  outline-offset:-3px;
+}
+
+.rhythm-education__content{
+  min-height:154px;
+  padding:18px 20px 20px;
+}
+
+.rhythm-education__overview{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:18px;
+}
+
+.rhythm-education__overview p{
+  margin:0;
+  color:rgba(255,255,255,0.76);
+  line-height:1.65;
+}
+
+.rhythm-education__characteristics{
+  margin:0;
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0, 1fr));
+  gap:10px;
+}
+
+.rhythm-education__characteristic{
+  min-width:0;
+  padding:12px 14px;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  background:rgba(0,0,0,0.18);
+}
+
+.rhythm-education__characteristic dt{
+  margin-bottom:5px;
+  color:rgba(126,240,165,0.75);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+}
+
+.rhythm-education__characteristic dd{
+  margin:0;
+  color:rgba(255,255,255,0.86);
+  font-size:14px;
+  line-height:1.45;
+}
+
+.rhythm-education__list{
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
+  list-style:none;
+}
+
+.rhythm-education__list li{
+  position:relative;
+  padding:11px 14px 11px 32px;
+  border:1px solid rgba(255,255,255,0.08);
+  border-radius:14px;
+  background:rgba(0,0,0,0.16);
+  color:rgba(255,255,255,0.8);
+  font-size:14px;
+  line-height:1.5;
+}
+
+.rhythm-education__list li::before{
+  content:"";
+  position:absolute;
+  left:14px;
+  top:18px;
+  width:7px;
+  height:7px;
+  border-radius:50%;
+  background:var(--accent2);
+  box-shadow:0 0 0 3px rgba(125,49,71,0.18);
+}
+
 /* Responsive */
 @media (max-width: 1100px){
   .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .sim-grid{ grid-template-columns: 1fr; }
+  .sim-media-grid{ grid-template-columns:1fr; }
+  .sim-waveform-panel{
+    height:auto;
+    min-height:480px;
+  }
 }
 
 @media (max-width: 860px){
@@ -447,6 +750,27 @@ body{
     position:relative;
     top:auto;
     height:auto;
+  }
+  .rhythm-education__overview,
+  .rhythm-education__list{
+    grid-template-columns:1fr;
+  }
+  .rhythm-education__characteristics{
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px){
+  .rhythm-education__heading,
+  .rhythm-education__content{
+    padding-left:14px;
+    padding-right:14px;
+  }
+  .rhythm-education__tabs{
+    padding:0 14px;
+  }
+  .rhythm-education__characteristics{
+    grid-template-columns:1fr;
   }
 }
 
