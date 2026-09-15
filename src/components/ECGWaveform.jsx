@@ -1,4 +1,5 @@
 import React, { useEffect, useId, useMemo, useRef, useState } from "react";
+import { buildAtrialFlutterPattern } from "./atrialFlutterPattern.js";
 
 const VIEWBOX_WIDTH = 360;
 const VIEWBOX_HEIGHT = 180;
@@ -88,27 +89,6 @@ const WAVEFORM_PATTERNS = {
       [100, 66],
       [112, 120],
       [126, 94],
-    ],
-  },
-  "atrial-flutter": {
-    cycleWidth: 156,
-    points: [
-      [0, 96],
-      [12, 84],
-      [24, 72],
-      [36, 96],
-      [48, 84],
-      [60, 72],
-      [72, 96],
-      [84, 84],
-      [96, 72],
-      [108, 96],
-      [118, 100],
-      [124, 46],
-      [130, 134],
-      [138, 92],
-      [148, 82],
-      [156, 90],
     ],
   },
   "ectopic-atrial-rhythm": {
@@ -247,6 +227,7 @@ export default function ECGWaveform({
   isPlaying = true,
   speed = 1,
   height = 280,
+  flutterHumps = 1,
 }) {
   const clipPathId = useId();
   const animationFrameRef = useRef(0);
@@ -254,8 +235,11 @@ export default function ECGWaveform({
   const [offset, setOffset] = useState(0);
 
   const pattern = useMemo(() => {
+    if (rhythmId === "atrial-flutter") {
+      return buildAtrialFlutterPattern(flutterHumps);
+    }
     return WAVEFORM_PATTERNS[rhythmId] || WAVEFORM_PATTERNS["normal-sinus"];
-  }, [rhythmId]);
+  }, [rhythmId, flutterHumps]);
 
   const waveformPath = useMemo(() => {
     return buildContinuousPath(pattern);
