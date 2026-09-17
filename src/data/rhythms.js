@@ -54,7 +54,7 @@ export const RHYTHMS = [
     tag: "SVT",
     image: "/assets/ecg/supraventricular-tachycardia.jpg",
     description: "Very fast rhythm arising above the ventricles suddenly.",
-    bpm: { type: "fixed", value: 180 },
+    bpm: { type: "fixed", value: 150 },
   },
 
   {
