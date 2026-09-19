@@ -49,7 +49,9 @@ export default function RealTimeMode() {
   );
 
   const [simulationState, setSimulationState] = useState(() => buildInitialState(selectedScenario));
-
+  // Start button and countdown
+  const [hasStarted, setHasStarted] = useState(false);
+  const [countdown, setCountdown] = useState(null);
   const currentStep =
     selectedScenario?.steps?.[simulationState.stepId] ||
     selectedScenario?.steps?.[selectedScenario.initialStepId];
@@ -61,8 +63,9 @@ export default function RealTimeMode() {
   }, [selectedScenario]);
 
   useEffect(() => {
-    if (isScenarioFinished) {
-      return undefined;
+  // Start the timer only after the countdown finishes
+  if (isScenarioFinished || !hasStarted || countdown > 0) {
+    return undefined;
     }
 
     const timer = setInterval(() => {
@@ -102,13 +105,34 @@ export default function RealTimeMode() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [isScenarioFinished, selectedScenario]);
+    //edited
+  }, [isScenarioFinished, selectedScenario, hasStarted, countdown]);
+
+  // Countdown before simulation starts
+  useEffect(() => {
+    if (countdown === null || countdown === 0) {
+      return undefined;
+    }
+
+  const timer = setTimeout(() => {
+    setCountdown((currentCountdown) => currentCountdown - 1);
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, [countdown]);
+  // Start simulation and begin countdown
+  function handleStartSimulation() {
+    setHasStarted(true);
+    setCountdown(3);
+  }
 
   function handleScenarioChange(scenarioId) {
     const nextScenario =
       REAL_TIME_SCENARIOS.find((scenario) => scenario.id === scenarioId) || REAL_TIME_SCENARIOS[0];
 
     setSimulationState(buildInitialState(nextScenario));
+    setHasStarted(false);
+    setCountdown(null);
     setSelectedScenarioId(scenarioId);
   }
 
@@ -188,6 +212,39 @@ export default function RealTimeMode() {
             aria-label="Real time simulation area"
             style={{ minHeight: 560, padding: 24, background: "#121218" }}
           >
+          {!hasStarted ? (
+            <div
+              style={{
+                width: "100%",
+                minHeight: 512,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+            <button
+              type="button"
+              className="sidebar__btn"
+              onClick={handleStartSimulation}
+            >
+              Start
+            </button>
+          </div>
+        ) : countdown > 0 ? (
+          <div
+            style={{
+                width: "100%",
+                minHeight: 512,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                fontSize: 72,
+                fontWeight: 700,
+              }}
+              >
+                {countdown}
+              </div>
+            ) : (
             <div
               style={{
                 width: "100%",
@@ -198,8 +255,7 @@ export default function RealTimeMode() {
             >
               <ECGWaveform
                 rhythmId={simulationState.currentRhythmId}
-                isPlaying={!isScenarioFinished}
-                speed={1}
+                isPlaying={hasStarted && countdown === 0 && !isScenarioFinished}
                 height={250}
               />
 
@@ -335,6 +391,7 @@ export default function RealTimeMode() {
                 </div>
               </div>
             </div>
+            )}
           </div>
         </div>
 
