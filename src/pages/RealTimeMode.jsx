@@ -208,7 +208,7 @@ export default function RealTimeMode() {
           </div>
 
           <div
-            className="canvas"
+            className="sim-canvas"
             aria-label="Real time simulation area"
             style={{ minHeight: 560, padding: 24, background: "#121218" }}
           >
@@ -415,26 +415,48 @@ export default function RealTimeMode() {
               Scenario Select
             </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-              {REAL_TIME_SCENARIOS.map((scenario) => (
-                <button
-                  key={scenario.id}
-                  type="button"
-                  className="sidebar__btn"
+            <label className="sim-waveform-speed" style={{ width: "100%", minWidth: 0 }}>
+              <span style={{ flexShrink: 0 }}>Scenario</span>
+              <div style={{ position: "relative", flex: 1, minWidth: 0 }}>
+                <select
+                  value={selectedScenario.id}
+                  onChange={(event) => handleScenarioChange(event.target.value)}
                   style={{
-                    marginTop: 0,
-                    textAlign: "left",
-                    background:
-                      scenario.id === selectedScenario.id
-                        ? "linear-gradient(135deg, rgba(90,34,49,0.55), rgba(125,49,71,0.35))"
-                        : "rgba(255,255,255,0.06)",
+                    width: "100%",
+                    minWidth: 0,
+                    maxWidth: "100%",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    whiteSpace: "nowrap",
+                    padding: "6px 30px 6px 10px",
+                    appearance: "none",
+                    WebkitAppearance: "none",
+                    MozAppearance: "none",
                   }}
-                  onClick={() => handleScenarioChange(scenario.id)}
                 >
-                  {scenario.title}
-                </button>
-              ))}
-            </div>
+                  {REAL_TIME_SCENARIOS.map((scenario) => (
+                    <option key={scenario.id} value={scenario.id}>
+                      {scenario.title}
+                    </option>
+                  ))}
+                </select>
+                <span
+                  aria-hidden="true"
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    right: 12,
+                    transform: "translateY(-50%)",
+                    pointerEvents: "none",
+                    color: "rgba(255,255,255,0.75)",
+                    fontSize: 10,
+                    lineHeight: 1,
+                  }}
+                >
+                  &#9662;
+                </span>
+              </div>
+            </label>
 
             <button type="button" className="sidebar__btn sidebar__btn--ghost" onClick={handleRestartScenario}>
               Restart Current Scenario
