@@ -247,7 +247,7 @@ export default function EKGWaveforms() {
           marginTop: 16,
           display: "flex",
           gap: 16,
-          alignItems: "stretch",
+          alignItems: "flex-start",
         }}
       >
         <aside
@@ -635,7 +635,10 @@ export default function EKGWaveforms() {
 
         <aside
           aria-label="Rhythm information"
-          style={panelShellStyle(rightCollapsed ? 96 : 260, rightCollapsed)}
+          style={{
+            ...panelShellStyle(rightCollapsed ? 96 : 260, rightCollapsed),
+            maxHeight: "calc(100vh - 170px)",
+          }}
         >
           {!rightCollapsed ? (
             <div
@@ -660,7 +663,16 @@ export default function EKGWaveforms() {
             </div>
           )}
 
-          <div style={{ flex: 1, display: "flex", flexDirection: "column", paddingTop: 4 }}>
+          <div
+            style={{
+              flex: 1,
+              minHeight: 0,
+              display: "flex",
+              flexDirection: "column",
+              paddingTop: 4,
+              overflowY: "auto",
+            }}
+          >
             {rightCollapsed ? (
               <div
                 style={{
