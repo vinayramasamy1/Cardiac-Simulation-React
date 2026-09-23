@@ -670,6 +670,7 @@ export default function EKGWaveforms() {
               display: "flex",
               flexDirection: "column",
               paddingTop: 4,
+              paddingRight: 14,
               overflowY: "auto",
             }}
           >

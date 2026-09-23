@@ -21,6 +21,10 @@
 }
 
 *{ box-sizing:border-box; }
+/* This app is dark-only. Without this, the browser renders native UI
+   (scrollbars, select dropdowns, etc.) with its light default even inside
+   an all-dark page — most visible on inner overflow:auto scroll panels. */
+html{ color-scheme: dark; }
 html,body{ height:100%; }
 body{
   margin:0;
