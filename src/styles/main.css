@@ -377,7 +377,12 @@ body{
   gap: 12px;
 }
 
-.canvas{
+/* Note: intentionally NOT named ".canvas" — that class is also used (further
+   down this file) by Sim.jsx's video panel with an unrelated fixed-height,
+   centered-flex layout. Reusing the same class name there caused the later
+   rule to win and silently override this element's sizing, clipping content
+   that grew taller than 65vh. Keep this name unique to RealTimeMode. */
+.sim-canvas{
   border-radius: 22px;
   border: 1px solid rgba(255,255,255,0.10);
   background:
@@ -387,7 +392,7 @@ body{
   position:relative;
   overflow:hidden;
 }
-.canvas__placeholder{
+.sim-canvas__placeholder{
   position:absolute;
   inset: 18px;
   border-radius: 18px;
@@ -400,7 +405,7 @@ body{
   color: rgba(255,255,255,0.70);
   line-height: 1.6;
 }
-.canvas__placeholder strong{
+.sim-canvas__placeholder strong{
   color: rgba(255,255,255,0.92);
 }
 
