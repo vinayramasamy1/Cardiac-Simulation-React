@@ -29,6 +29,18 @@ const STATUS_STYLES = {
   },
 };
 
+// Shuffle answer choices
+function shuffleActions(actions) {
+  const shuffled = [...actions];
+
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  return shuffled;
+}
+
 function buildInitialState(scenario) {
   return {
     stepId: scenario.initialStepId,
@@ -52,11 +64,18 @@ export default function RealTimeMode() {
   // Start button and countdown
   const [hasStarted, setHasStarted] = useState(false);
   const [countdown, setCountdown] = useState(null);
+  // Tracks new attempts so answers reshuffle on restart
+  const [attemptNumber, setAttemptNumber] = useState(0);
   const currentStep =
     selectedScenario?.steps?.[simulationState.stepId] ||
     selectedScenario?.steps?.[selectedScenario.initialStepId];
   const statusStyle = STATUS_STYLES[simulationState.patientStatus] || STATUS_STYLES.stable;
   const isScenarioFinished = simulationState.outcome !== null;
+  // Shuffle the answer choices for each question and new attempt
+  const shuffledActions = useMemo(
+    () => shuffleActions(currentStep?.actions || []),
+    [selectedScenarioId, simulationState.stepId, attemptNumber]
+  );
 
   useEffect(() => {
     setSimulationState(buildInitialState(selectedScenario));
@@ -138,6 +157,7 @@ export default function RealTimeMode() {
 
   function handleRestartScenario() {
     setSimulationState(buildInitialState(selectedScenario));
+    setAttemptNumber((currentAttempt) => currentAttempt + 1);
   }
 
   function handleAction(action) {
@@ -371,7 +391,7 @@ export default function RealTimeMode() {
                       </button>
                     </div>
                   ) : (
-                    currentStep.actions.map((action) => (
+                    shuffledActions.map((action) => (
                       <button
                         key={action.id}
                         type="button"
