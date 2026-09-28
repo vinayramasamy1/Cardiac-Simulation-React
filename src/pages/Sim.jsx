@@ -92,11 +92,17 @@ export default function Sim() {
   const rhythm = useMemo(() => RHYTHMS.find((x) => x.id === id), [id]);
   const videoSrc = RHYTHM_VIDEO_PATHS[rhythm?.id];
 
+  // Reset animation speed when switching rhythms
+  useEffect(() => {
+    setPlaybackRate(1);
+  }, [id]);
+
   useEffect(() => {
     if (videoRef.current) {
       videoRef.current.playbackRate = playbackRate;
     }
   }, [playbackRate]);
+
 
   if (!rhythm) {
     return (
