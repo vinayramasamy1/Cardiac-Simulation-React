@@ -163,7 +163,7 @@
 .review-quiz__navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin: 18px 4px 0; }
 .review-quiz__navigation .review-quiz__button { min-height: 46px; }
 
-/* Twenty questions form two quiet rows on desktop; flags never change tile size. */
+/* Question tiles flow into responsive grid rows; flags never change tile size. */
 .review-quiz__numbers { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 8px; width: 100%; max-width: 536px; margin: 24px auto 10px; padding: 20px 4px 4px; border-top: 1px solid #ffffff0c; }
 .review-quiz__number { position: relative; min-width: 0; min-height: 44px; padding: 6px; border: 1px solid #463a46; border-radius: 9px; background: transparent; color: #c4b7c6; font: inherit; font-size: 13px; font-variant-numeric: tabular-nums; cursor: pointer; transition: background-color 150ms ease, border-color 150ms ease; }
 .review-quiz__number:not(:disabled):hover { background: #392a36; border-color: #a47186; }

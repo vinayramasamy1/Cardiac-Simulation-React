@@ -53,7 +53,7 @@ Learners can open a rhythm-specific video module, compare animated ECG waveform 
 ### Reviews and quizzes
 
 - Three review categories: Heart Anatomy, Medication, and Heart Conditions.
-- Ten multiple-choice questions per category, for 30 questions total.
+- 40 multiple-choice questions per category, for 120 questions total.
 - Immediate correct/incorrect state styling.
 - Choice-specific explanations, including feedback for incorrect answers.
 - Quiz reset and category navigation controls.
