@@ -1,0 +1,901 @@
+{
+  "profile": "slow4g",
+  "baseUrl": "http://localhost:4173",
+  "ranAt": "2026-10-04T19-45-46",
+  "results": [
+    {
+      "scenario": "Home",
+      "steps": [
+        {
+          "step": "Open /",
+          "requests": 9,
+          "transferredBytes": 131056,
+          "finishSeconds": 2.62,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/assets/icon-rhythms.svg",
+              "bytes": 747
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Rhythms",
+      "steps": [
+        {
+          "step": "Open /rhythms",
+          "requests": 13,
+          "transferredBytes": 1616848,
+          "finishSeconds": 10.87,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/ecg/atrial-fibrillation.jpg",
+              "bytes": 792803
+            },
+            {
+              "file": "/assets/ecg/normal-sinus.jpg",
+              "bytes": 490192
+            },
+            {
+              "file": "/assets/ecg/sinus-tachycardia.jpg",
+              "bytes": 119517
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/ecg/supraventricular-tachycardia.jpg",
+              "bytes": 28024
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "EKG Waveforms",
+      "steps": [
+        {
+          "step": "Open /ekg-waveforms",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.55,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/ekg-waveforms",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Case Studies",
+      "steps": [
+        {
+          "step": "Open /case-studies",
+          "requests": 23,
+          "transferredBytes": 6673374,
+          "finishSeconds": 38.99,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/casestudypngs/atrial-fibrillation-treatment.png",
+              "bytes": 849111
+            },
+            {
+              "file": "/assets/casestudypngs/wpw-treatment.png",
+              "bytes": 823902
+            },
+            {
+              "file": "/assets/casestudypngs/ventricular-tachycardia-treatment.png",
+              "bytes": 813338
+            },
+            {
+              "file": "/assets/casestudypngs/supraventricular-tachycardia-treatment.png",
+              "bytes": 812382
+            },
+            {
+              "file": "/assets/casestudypngs/sinus-tachycardia-treatment.png",
+              "bytes": 807756
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Reviews",
+      "steps": [
+        {
+          "step": "Open /reviews",
+          "requests": 9,
+          "transferredBytes": 131037,
+          "finishSeconds": 2.6,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/assets/icon-rhythms.svg",
+              "bytes": 747
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Reviews: Heart Anatomy quiz",
+      "steps": [
+        {
+          "step": "Open /reviews/heart-anatomy",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.64,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/reviews/heart-anatomy",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Reviews: Medication quiz",
+      "steps": [
+        {
+          "step": "Open /reviews/medication",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.64,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/reviews/medication",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Reviews: Heart Conditions quiz",
+      "steps": [
+        {
+          "step": "Open /reviews/heart-conditions",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.58,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/reviews/heart-conditions",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Real Time Mode",
+      "steps": [
+        {
+          "step": "Open /real-time-mode",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.53,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/real-time-mode",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Page not found",
+      "steps": [
+        {
+          "step": "Open /this-page-does-not-exist",
+          "requests": 5,
+          "transferredBytes": 128208,
+          "finishSeconds": 2.54,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/this-page-does-not-exist",
+              "bytes": 727
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Normal Sinus Rhythm",
+      "steps": [
+        {
+          "step": "Open /sim/normal-sinus",
+          "requests": 6,
+          "transferredBytes": 1773685,
+          "finishSeconds": 11.71,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/NSR-New.mp4",
+              "bytes": 1645477
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Atrial Fibrillation",
+      "steps": [
+        {
+          "step": "Open /sim/atrial-fibrillation",
+          "requests": 6,
+          "transferredBytes": 2726661,
+          "finishSeconds": 17.13,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/AFib.mp4",
+              "bytes": 2598453
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Ventricular Fibrillation",
+      "steps": [
+        {
+          "step": "Open /sim/ventricular-fibrillation",
+          "requests": 6,
+          "transferredBytes": 2808175,
+          "finishSeconds": 17.69,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/VFib.mp4",
+              "bytes": 2679967
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Atrial Flutter",
+      "steps": [
+        {
+          "step": "Open /sim/atrial-flutter",
+          "requests": 6,
+          "transferredBytes": 2608750,
+          "finishSeconds": 16.42,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/AtrialFlutter.mp4",
+              "bytes": 2480542
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Sinus Tachycardia",
+      "steps": [
+        {
+          "step": "Open /sim/sinus-tachycardia",
+          "requests": 6,
+          "transferredBytes": 2023977,
+          "finishSeconds": 13.19,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/STach.mp4",
+              "bytes": 1895769
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Ventricular Tachycardia",
+      "steps": [
+        {
+          "step": "Open /sim/ventricular-tachycardia",
+          "requests": 6,
+          "transferredBytes": 1390775,
+          "finishSeconds": 9.61,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/VTach.mp4",
+              "bytes": 1262567
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Supraventricular Tachycardia",
+      "steps": [
+        {
+          "step": "Open /sim/supraventricular-tachycardia",
+          "requests": 6,
+          "transferredBytes": 2359203,
+          "finishSeconds": 15.05,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/SuperTach.mp4",
+              "bytes": 2230995
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Wolff-Parkinson-White (WPW)",
+      "steps": [
+        {
+          "step": "Open /sim/wpw",
+          "requests": 6,
+          "transferredBytes": 1889802,
+          "finishSeconds": 12.47,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/wolff-parkinsons-white.mp4",
+              "bytes": 1761594
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: Ectopic Atrial Rhythm",
+      "steps": [
+        {
+          "step": "Open /sim/ectopic-atrial-rhythm",
+          "requests": 6,
+          "transferredBytes": 1604050,
+          "finishSeconds": 10.88,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/ectopic_atrial.mp4",
+              "bytes": 1475842
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Tour: a first visit",
+      "steps": [
+        {
+          "step": "Open /",
+          "requests": 9,
+          "transferredBytes": 131056,
+          "finishSeconds": 2.54,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            },
+            {
+              "file": "/assets/icon-rhythms.svg",
+              "bytes": 747
+            }
+          ]
+        },
+        {
+          "step": "Click Rhythms in top bar",
+          "requests": 9,
+          "transferredBytes": 1488767,
+          "finishSeconds": 8.91,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/ecg/atrial-fibrillation.jpg",
+              "bytes": 792803
+            },
+            {
+              "file": "/assets/ecg/normal-sinus.jpg",
+              "bytes": 490192
+            },
+            {
+              "file": "/assets/ecg/sinus-tachycardia.jpg",
+              "bytes": 119517
+            },
+            {
+              "file": "/assets/ecg/supraventricular-tachycardia.jpg",
+              "bytes": 28024
+            },
+            {
+              "file": "/assets/ecg/wpw.jpg",
+              "bytes": 27001
+            }
+          ]
+        },
+        {
+          "step": "Click Atrial Fibrillation card",
+          "requests": 2,
+          "transferredBytes": 2598580,
+          "finishSeconds": 15.1,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/AFib.mp4",
+              "bytes": 2598453
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 127
+            }
+          ]
+        },
+        {
+          "step": "Click Case Studies in top bar",
+          "requests": 19,
+          "transferredBytes": 6545293,
+          "finishSeconds": 37.03,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/casestudypngs/atrial-fibrillation-treatment.png",
+              "bytes": 849111
+            },
+            {
+              "file": "/assets/casestudypngs/wpw-treatment.png",
+              "bytes": 823902
+            },
+            {
+              "file": "/assets/casestudypngs/ventricular-tachycardia-treatment.png",
+              "bytes": 813338
+            },
+            {
+              "file": "/assets/casestudypngs/supraventricular-tachycardia-treatment.png",
+              "bytes": 812382
+            },
+            {
+              "file": "/assets/casestudypngs/sinus-tachycardia-treatment.png",
+              "bytes": 807756
+            }
+          ]
+        },
+        {
+          "step": "Click Reviews in top bar",
+          "requests": 5,
+          "transferredBytes": 1167,
+          "finishSeconds": 0.61,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/icon-real-time-mode.svg",
+              "bytes": 659
+            },
+            {
+              "file": "/assets/icon-rhythms.svg",
+              "bytes": 127
+            },
+            {
+              "file": "/assets/icon-case-studies.svg",
+              "bytes": 127
+            },
+            {
+              "file": "/assets/icon-reviews.svg",
+              "bytes": 127
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Sim: switch rhythms with the sidebar",
+      "steps": [
+        {
+          "step": "Open /sim/normal-sinus",
+          "requests": 6,
+          "transferredBytes": 1773685,
+          "finishSeconds": 11.79,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/NSR-New.mp4",
+              "bytes": 1645477
+            },
+            {
+              "file": "/assets/index-DNmrWWYG.js",
+              "bytes": 118080
+            },
+            {
+              "file": "/assets/index-rKV7Q6kP.css",
+              "bytes": 7478
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 1091
+            },
+            {
+              "file": "/assets/logo.svg",
+              "bytes": 832
+            }
+          ]
+        },
+        {
+          "step": "Switch to Ventricular Fibrillation",
+          "requests": 2,
+          "transferredBytes": 2680094,
+          "finishSeconds": 15.63,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/VFib.mp4",
+              "bytes": 2679967
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 127
+            }
+          ]
+        },
+        {
+          "step": "Switch to Ventricular Tachycardia",
+          "requests": 2,
+          "transferredBytes": 1262694,
+          "finishSeconds": 7.63,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/videos/VTach.mp4",
+              "bytes": 1262567
+            },
+            {
+              "file": "/vite.svg",
+              "bytes": 127
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scenario": "Case Studies: click through every case",
+      "steps": [
+        {
+          "step": "Open /case-studies",
+          "requests": 23,
+          "transferredBytes": 6673374,
+          "finishSeconds": 39.01,
+          "timedOut": false,
+          "biggestFiles": [
+            {
+              "file": "/assets/casestudypngs/atrial-fibrillation-treatment.png",
+              "bytes": 849111
+            },
+            {
+              "file": "/assets/casestudypngs/wpw-treatment.png",
+              "bytes": 823902
+            },
+            {
+              "file": "/assets/casestudypngs/ventricular-tachycardia-treatment.png",
+              "bytes": 813338
+            },
+            {
+              "file": "/assets/casestudypngs/supraventricular-tachycardia-treatment.png",
+              "bytes": 812382
+            },
+            {
+              "file": "/assets/casestudypngs/sinus-tachycardia-treatment.png",
+              "bytes": 807756
+            }
+          ]
+        },
+        {
+          "step": "Open every case and its Treatment view",
+          "requests": 0,
+          "transferredBytes": 0,
+          "finishSeconds": 0,
+          "timedOut": false,
+          "biggestFiles": []
+        }
+      ]
+    }
+  ]
+}
