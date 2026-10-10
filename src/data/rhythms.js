@@ -46,7 +46,7 @@ export const RHYTHMS = [
     tag: "VTach",
     image: "/assets/ecg/ventricular-tachycardia.jpg",
     description: "Fast ventricular rhythm that may rapidly become life-threatening.",
-    bpm: { type: "fixed", value: 160 },
+    bpm: { type: "fixed", value: 220 },
   },
   {
     id: "supraventricular-tachycardia",
